@@ -1,0 +1,14 @@
+2023-02-11T10:44:53+00:00 CRITICAL Uncaught Error: Call to undefined method WP_Post::get_price() in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php:49
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\template-loader.php(106): include()
+#1 C:\wamp64\www\raselswedens\wp-blog-header.php(19): require_once('C:\\wamp64\\www\\r...')
+#2 C:\wamp64\www\raselswedens\index.php(17): require('C:\\wamp64\\www\\r...')
+#3 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php on line 49
+
+2023-02-11T10:49:25+00:00 CRITICAL syntax error, unexpected '=', expecting ')' in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php on line 19
+
+2023-02-11T10:50:02+00:00 CRITICAL syntax error, unexpected '=', expecting ')' in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php on line 19
+
+2023-02-11T10:51:33+00:00 CRITICAL syntax error, unexpected '=', expecting ')' in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php on line 19
+

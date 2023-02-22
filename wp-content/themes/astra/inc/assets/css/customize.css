@@ -1,0 +1,294 @@
+.ekit-template-content-markup {
+  position: sticky;
+}
+.product_page_element {
+  display: flex;
+  gap: 20px;
+}
+.product_page_element h4 {
+  font-size: 18px;
+}
+.product_page_element .col-lg-9 {
+  width: 80%;
+}
+
+.product_page_element .col-lg-9 .product_lists {
+  grid-template-columns: repeat(3, 2fr);
+  display: grid;
+  width: 100%;
+}
+.product_page_element .col-lg-9 .products {
+  margin: 13px 11px;
+  height: 435px;
+}
+
+.product_page_element .col-lg-9 .products .product_description {
+  margin-top: 9px;
+  display: flex;
+  justify-content: space-between;
+}
+.product_page_element .col-lg-9 .products .product_image {
+  position: relative;
+}
+.product_page_element .col-lg-9 .products .product_image img {
+  height: 389px;
+  object-fit: cover;
+}
+.product_page_element .col-lg-9 .products:hover .variations {
+  display: block;
+  transition: 0.4s ease-in-out all;
+  transform: translateY(-9px);
+}
+.product_page_element .col-lg-9 .variations {
+  display: none;
+  position: absolute;
+  bottom: 6px;
+  transition: 0.4s ease-in-out all;
+  transform: translateY(0px);
+}
+.product_page_element .col-lg-9 .products .product_variations {
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  left: 15px;
+  position: relative;
+  top: 0px;
+}
+.product_page_element .col-lg-9 .products .product_variations .quick_shop a {
+  background: #5bc0de;
+  color: #fff;
+  display: block;
+  padding: 6px 16px;
+}
+.product_page_element .col-lg-9 .products .product_variations select {
+  background-size: 0.8em;
+  background-repeat: no-repeat;
+  background-position-x: calc(124px - 9px);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 35px;
+  position: relative;
+  width: 134px;
+  margin-right: 7px;
+  padding: 14px;
+  font-size: 14px;
+  border: 0px;
+  background-position-y: 18px;
+}
+.product_page_element .col-lg-9 .products .product_variations button {
+  background: rgb(3, 178, 159);
+  width: 140px;
+  font-size: 12px;
+  color: #fff;
+  border: 0px;
+  font-weight: 500;
+}
+.product_page_element .col-lg-3 {
+  width: 267px;
+  display: block;
+}
+.product_page_element .col-lg-3 ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.product_page_element .col-lg-3 ul li a {
+  font-size: 12px;
+  display: block;
+  margin: 13px 0px;
+}
+
+.product_page_element .product_title h6 {
+  font-size: 13px;
+  color: #282828;
+}
+.product_page_element .product_price h5 {
+  font-size: 13px;
+  color: #282828;
+}
+
+/* filter */
+.filter {
+  width: 100%;
+  padding-bottom: 10px;
+  display: flex;
+  gap: 17px;
+}
+.filter .price_filter,
+.filter .size_filter,
+.filter .color_filter,
+.filter .brand_filter,
+.filter .material_filter {
+  flex: 1 0 15%;
+}
+.filter .filter_header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.filter .price_filter .price_filter_dropdown {
+  position: absolute;
+  padding: 12px;
+  border: 1px solid #efefef;
+  width: 18%;
+  z-index: 9999;
+  background: #fdfdfd;
+  margin-top: 13px;
+  display: none;
+}
+
+.filter .size_filter .size_filter_dropdown {
+  position: absolute;
+  padding: 12px;
+  border: 1px solid #efefef;
+  width: 18%;
+  z-index: 9999;
+  background: #fdfdfd;
+  margin-top: 0px;
+  display: none;
+  left: 1px;
+}
+
+.filter .color_filter .color_filter_dropdown {
+  position: absolute;
+  padding: 12px;
+  border: 1px solid #efefef;
+  width: 18%;
+  z-index: 9999;
+  background: #fdfdfd;
+  margin-top: 13px;
+  display: none;
+}
+.filter .brand_filter:hover,
+.filter .color_filter:hover,
+.filter .size_filter:hover,
+.filter .price_filter:hover {
+  background: #f3f3f3;
+  transition: 0.5s ease-in-out;
+}
+.filter .brand_filter:hover .brand_filter_dropdown {
+  display: block;
+  transition: 0.5s ease-in-out;
+}
+.filter .brand_filter .brand_filter_dropdown {
+  position: absolute;
+  padding: 12px;
+  border: 1px solid #efefef;
+  background: #fdfdfd;
+  margin-top: 1px;
+  z-index: 9999;
+  right: 36px;
+  display: none;
+  transition: 0.5s ease-in-out;
+}
+
+.filter .brand_filter .brand_filter_dropdown .brand_filter_dropdown_items {
+  border: 1px solid #efefef;
+  background: #fdfdfd;
+  display: flex;
+  gap: 19px;
+  flex-wrap: wrap;
+}
+
+.filter
+  .brand_filter
+  .brand_filter_dropdown
+  .brand_filter_dropdown_items
+  .items {
+  flex: 10%;
+  padding: 8%;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+.filter
+  .brand_filter
+  .brand_filter_dropdown
+  .brand_filter_dropdown_items
+  .items:hover {
+  background: #ededed;
+}
+/* material filter */
+.filter .material_filter {
+  position: relative;
+  background-color: #fff;
+  z-index: 999999;
+}
+.filter .material_filter .material_filter_dropdown {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: #fff;
+  z-index: 999999;
+  width: 100%;
+  right: 10px;
+  line-height: 36px;
+  height: 251px;
+  overflow: scroll;
+  overflow-x: hidden;
+  display: none;
+}
+.filter .material_filter:hover .material_filter_dropdown {
+  display: block;
+}
+.filter .material_filter:hover .material_filter_dropdown a {
+  display: block;
+  padding: 3px 14px;
+  border-bottom: 1px solid #ddd;
+}
+.filter .material_filter:hover .material_filter_dropdown a:hover {
+  background: #ededed;
+}
+
+/* szie filter */
+.filter .size_filter {
+  position: relative;
+  background-color: #fff;
+  z-index: 999999;
+}
+.filter .size_filter .size_filter_dropdown {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: #fff;
+  z-index: 999999;
+  width: 100%;
+  right: 10px;
+  line-height: 36px;
+  height: 251px;
+  overflow: scroll;
+  overflow-x: hidden;
+  display: none;
+}
+.filter .size_filter:hover .size_filter_dropdown {
+  display: block;
+}
+.filter .size_filter:hover .size_filter_dropdown a {
+  display: block;
+  padding: 3px 14px;
+  border-bottom: 1px solid #ddd;
+}
+.filter .size_filter:hover .size_filter_dropdown a:hover {
+  background: #ededed;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .product_page_element {
+    flex-direction: column; /* Change flex-direction to column to stack the items vertically */
+  }
+
+  .product_page_element .col-lg-9 {
+    width: 100%; /* Set width to 100% to take up the full width of the screen */
+  }
+
+  .product_page_element .col-lg-3 {
+    width: 100%; /* Set width to 100% to take up the full width of the screen */
+  }
+  .product_page_element .col-lg-9 .product_lists {
+    display: block;
+    width: 100%;
+  }
+}

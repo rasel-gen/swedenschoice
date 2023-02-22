@@ -1,0 +1,1 @@
+<?php dynamic_sidebar( 'price-filter-widget' ); ?>

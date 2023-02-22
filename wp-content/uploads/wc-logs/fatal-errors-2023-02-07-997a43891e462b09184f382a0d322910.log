@@ -1,0 +1,35 @@
+2023-02-07T12:12:15+00:00 CRITICAL Uncaught Error: Object of class WP_Query could not be converted to string in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php:14
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\template-loader.php(106): include()
+#1 C:\wamp64\www\raselswedens\wp-blog-header.php(19): require_once('C:\\wamp64\\www\\r...')
+#2 C:\wamp64\www\raselswedens\index.php(17): require('C:\\wamp64\\www\\r...')
+#3 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php on line 14
+
+2023-02-07T12:12:31+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function WP_Query::get(), 0 passed in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php on line 14 and at least 1 expected in C:\wamp64\www\raselswedens\wp-includes\class-wp-query.php:1785
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php(14): WP_Query->get()
+#1 C:\wamp64\www\raselswedens\wp-includes\template-loader.php(106): include('C:\\wamp64\\www\\r...')
+#2 C:\wamp64\www\raselswedens\wp-blog-header.php(19): require_once('C:\\wamp64\\www\\r...')
+#3 C:\wamp64\www\raselswedens\index.php(17): require('C:\\wamp64\\www\\r...')
+#4 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-includes\class-wp-query.php on line 1785
+
+2023-02-07T12:12:41+00:00 CRITICAL Uncaught Error: Object of class WP_Query could not be converted to string in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php:14
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\template-loader.php(106): include()
+#1 C:\wamp64\www\raselswedens\wp-blog-header.php(19): require_once('C:\\wamp64\\www\\r...')
+#2 C:\wamp64\www\raselswedens\index.php(17): require('C:\\wamp64\\www\\r...')
+#3 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php on line 14
+
+2023-02-07T12:14:17+00:00 CRITICAL Uncaught Error: Object of class WP_Query could not be converted to string in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php:16
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\template-loader.php(106): include()
+#1 C:\wamp64\www\raselswedens\wp-blog-header.php(19): require_once('C:\\wamp64\\www\\r...')
+#2 C:\wamp64\www\raselswedens\index.php(17): require('C:\\wamp64\\www\\r...')
+#3 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php on line 16
+
+2023-02-07T12:21:45+00:00 CRITICAL syntax error, unexpected token "}" in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php on line 35
+

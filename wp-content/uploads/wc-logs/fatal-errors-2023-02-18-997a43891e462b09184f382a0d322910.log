@@ -1,0 +1,104 @@
+2023-02-18T04:53:29+00:00 CRITICAL require(): Failed opening required 'http://localhost/raselswedens/wp-content/themes/astra/theme-functions/custom_logo.php' (include_path='.;C:\php\pear') in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\functions.php on line 28
+
+2023-02-18T04:53:55+00:00 CRITICAL require_once(): Failed opening required 'http://localhost/raselswedens/wp-content/themes/astra/theme-functions/custom_logo.php' (include_path='.;C:\php\pear') in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\functions.php on line 28
+
+2023-02-18T05:57:51+00:00 CRITICAL require(): Failed opening required 'theme-parts/product-filter.php' (include_path='.;C:\php\pear') in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\functions.php on line 30
+
+2023-02-18T05:58:22+00:00 CRITICAL Cannot redeclare filter_products_by_category() (previously declared in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\product-filter.php:6) in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php on line 6
+
+2023-02-18T05:58:38+00:00 CRITICAL require(): Failed opening required 'template-parts/wocommerce_products/product_filter.php' (include_path='.;C:\php\pear') in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php on line 191
+
+2023-02-18T11:25:39+00:00 CRITICAL Uncaught Error: Call to a member function get_price() on null in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\archive-product.php:252
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-content\plugins\woocommerce\includes\wc-core-functions.php(345): include()
+#1 C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\taxonomy-product-cat.php(22): wc_get_template('archive-product...')
+#2 C:\wamp64\www\raselswedens\wp-includes\template-loader.php(106): include('C:\\wamp64\\www\\r...')
+#3 C:\wamp64\www\raselswedens\wp-blog-header.php(19): require_once('C:\\wamp64\\www\\r...')
+#4 C:\wamp64\www\raselswedens\index.php(17): require('C:\\wamp64\\www\\r...')
+#5 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\archive-product.php on line 252
+
+2023-02-18T11:26:46+00:00 CRITICAL Uncaught Error: Call to a member function get_price() on null in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\archive-product.php:252
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-content\plugins\woocommerce\includes\wc-core-functions.php(345): include()
+#1 C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\taxonomy-product-cat.php(22): wc_get_template('archive-product...')
+#2 C:\wamp64\www\raselswedens\wp-includes\template-loader.php(106): include('C:\\wamp64\\www\\r...')
+#3 C:\wamp64\www\raselswedens\wp-blog-header.php(19): require_once('C:\\wamp64\\www\\r...')
+#4 C:\wamp64\www\raselswedens\index.php(17): require('C:\\wamp64\\www\\r...')
+#5 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\archive-product.php on line 252
+
+2023-02-18T11:26:51+00:00 CRITICAL Uncaught Error: Call to a member function get_price() on null in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\archive-product.php:252
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-content\plugins\woocommerce\includes\wc-core-functions.php(345): include()
+#1 C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\taxonomy-product-cat.php(22): wc_get_template('archive-product...')
+#2 C:\wamp64\www\raselswedens\wp-includes\template-loader.php(106): include('C:\\wamp64\\www\\r...')
+#3 C:\wamp64\www\raselswedens\wp-blog-header.php(19): require_once('C:\\wamp64\\www\\r...')
+#4 C:\wamp64\www\raselswedens\index.php(17): require('C:\\wamp64\\www\\r...')
+#5 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\archive-product.php on line 252
+
+2023-02-18T11:27:36+00:00 CRITICAL Uncaught Error: Call to a member function get_price() on null in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\archive-product.php:252
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-content\plugins\woocommerce\includes\wc-core-functions.php(345): include()
+#1 C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\taxonomy-product-cat.php(22): wc_get_template('archive-product...')
+#2 C:\wamp64\www\raselswedens\wp-includes\template-loader.php(106): include('C:\\wamp64\\www\\r...')
+#3 C:\wamp64\www\raselswedens\wp-blog-header.php(19): require_once('C:\\wamp64\\www\\r...')
+#4 C:\wamp64\www\raselswedens\index.php(17): require('C:\\wamp64\\www\\r...')
+#5 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\archive-product.php on line 252
+
+2023-02-18T11:28:13+00:00 CRITICAL Uncaught Error: Call to undefined function get_price() in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\archive-product.php:252
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-content\plugins\woocommerce\includes\wc-core-functions.php(345): include()
+#1 C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\taxonomy-product-cat.php(22): wc_get_template('archive-product...')
+#2 C:\wamp64\www\raselswedens\wp-includes\template-loader.php(106): include('C:\\wamp64\\www\\r...')
+#3 C:\wamp64\www\raselswedens\wp-blog-header.php(19): require_once('C:\\wamp64\\www\\r...')
+#4 C:\wamp64\www\raselswedens\index.php(17): require('C:\\wamp64\\www\\r...')
+#5 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\archive-product.php on line 252
+
+2023-02-18T11:33:09+00:00 CRITICAL Uncaught Error: Call to a member function get_price_html() on null in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\archive-product.php:252
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-content\plugins\woocommerce\includes\wc-core-functions.php(345): include()
+#1 C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\taxonomy-product-cat.php(22): wc_get_template('archive-product...')
+#2 C:\wamp64\www\raselswedens\wp-includes\template-loader.php(106): include('C:\\wamp64\\www\\r...')
+#3 C:\wamp64\www\raselswedens\wp-blog-header.php(19): require_once('C:\\wamp64\\www\\r...')
+#4 C:\wamp64\www\raselswedens\index.php(17): require('C:\\wamp64\\www\\r...')
+#5 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\archive-product.php on line 252
+
+2023-02-18T13:36:44+00:00 CRITICAL Uncaught Error: Call to a member function get_price_html() on null in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\product-filter.php:202
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(308): filter_products_by_color('')
+#1 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(332): WP_Hook->apply_filters('', Array)
+#2 C:\wamp64\www\raselswedens\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\wamp64\www\raselswedens\wp-admin\admin-ajax.php(203): do_action('wp_ajax_nopriv_...')
+#4 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\product-filter.php on line 202
+
+2023-02-18T13:36:48+00:00 CRITICAL Uncaught Error: Call to a member function get_price_html() on null in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\product-filter.php:202
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(308): filter_products_by_color('')
+#1 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(332): WP_Hook->apply_filters('', Array)
+#2 C:\wamp64\www\raselswedens\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\wamp64\www\raselswedens\wp-admin\admin-ajax.php(203): do_action('wp_ajax_nopriv_...')
+#4 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\product-filter.php on line 202
+
+2023-02-18T13:53:44+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Simple::get_available_variations() in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\archive-product.php:246
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\template-loader.php(106): include()
+#1 C:\wamp64\www\raselswedens\wp-blog-header.php(19): require_once('C:\\wamp64\\www\\r...')
+#2 C:\wamp64\www\raselswedens\index.php(17): require('C:\\wamp64\\www\\r...')
+#3 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\archive-product.php on line 246
+
+2023-02-18T13:53:56+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Simple::get_available_variations() in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\archive-product.php:246
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\template-loader.php(106): include()
+#1 C:\wamp64\www\raselswedens\wp-blog-header.php(19): require_once('C:\\wamp64\\www\\r...')
+#2 C:\wamp64\www\raselswedens\index.php(17): require('C:\\wamp64\\www\\r...')
+#3 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra-child\woocommerce\archive-product.php on line 246
+

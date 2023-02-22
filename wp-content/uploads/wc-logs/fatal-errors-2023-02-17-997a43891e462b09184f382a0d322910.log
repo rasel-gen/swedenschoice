@@ -1,0 +1,122 @@
+2023-02-17T16:47:34+00:00 CRITICAL Uncaught Error: Call to a member function get_price() on null in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php:275
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(308): filter_products_by_category('')
+#1 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(332): WP_Hook->apply_filters('', Array)
+#2 C:\wamp64\www\raselswedens\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\wamp64\www\raselswedens\wp-admin\admin-ajax.php(203): do_action('wp_ajax_nopriv_...')
+#4 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php on line 275
+
+2023-02-17T16:48:01+00:00 CRITICAL Uncaught Error: Call to a member function get_price() on null in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php:275
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(308): filter_products_by_category('')
+#1 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(332): WP_Hook->apply_filters('', Array)
+#2 C:\wamp64\www\raselswedens\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\wamp64\www\raselswedens\wp-admin\admin-ajax.php(203): do_action('wp_ajax_nopriv_...')
+#4 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php on line 275
+
+2023-02-17T16:49:18+00:00 CRITICAL Uncaught Error: Call to a member function get_price() on null in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php:275
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(308): filter_products_by_category('')
+#1 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(332): WP_Hook->apply_filters('', Array)
+#2 C:\wamp64\www\raselswedens\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\wamp64\www\raselswedens\wp-admin\admin-ajax.php(203): do_action('wp_ajax_nopriv_...')
+#4 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php on line 275
+
+2023-02-17T16:49:55+00:00 CRITICAL Uncaught Error: Call to a member function get_price() on null in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php:275
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(308): filter_products_by_category('')
+#1 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(332): WP_Hook->apply_filters('', Array)
+#2 C:\wamp64\www\raselswedens\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\wamp64\www\raselswedens\wp-admin\admin-ajax.php(203): do_action('wp_ajax_nopriv_...')
+#4 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php on line 275
+
+2023-02-17T16:52:30+00:00 CRITICAL Uncaught Error: Call to undefined function get_price() in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php:241
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\template-loader.php(106): include()
+#1 C:\wamp64\www\raselswedens\wp-blog-header.php(19): require_once('C:\\wamp64\\www\\r...')
+#2 C:\wamp64\www\raselswedens\index.php(17): require('C:\\wamp64\\www\\r...')
+#3 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php on line 241
+
+2023-02-17T16:52:37+00:00 CRITICAL Uncaught Error: Call to undefined function get_price() in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php:241
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\template-loader.php(106): include()
+#1 C:\wamp64\www\raselswedens\wp-blog-header.php(19): require_once('C:\\wamp64\\www\\r...')
+#2 C:\wamp64\www\raselswedens\index.php(17): require('C:\\wamp64\\www\\r...')
+#3 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php on line 241
+
+2023-02-17T16:52:47+00:00 CRITICAL Uncaught Error: Call to undefined function get_price() in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php:241
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\template-loader.php(106): include()
+#1 C:\wamp64\www\raselswedens\wp-blog-header.php(19): require_once('C:\\wamp64\\www\\r...')
+#2 C:\wamp64\www\raselswedens\index.php(17): require('C:\\wamp64\\www\\r...')
+#3 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\custom-product-page.php on line 241
+
+2023-02-17T16:53:00+00:00 CRITICAL Uncaught Error: Call to undefined function get_price() in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php:275
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(308): filter_products_by_category('')
+#1 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(332): WP_Hook->apply_filters('', Array)
+#2 C:\wamp64\www\raselswedens\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\wamp64\www\raselswedens\wp-admin\admin-ajax.php(203): do_action('wp_ajax_nopriv_...')
+#4 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php on line 275
+
+2023-02-17T16:53:21+00:00 CRITICAL Uncaught Error: Call to undefined function get_price() in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php:275
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(308): filter_products_by_category('')
+#1 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(332): WP_Hook->apply_filters('', Array)
+#2 C:\wamp64\www\raselswedens\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\wamp64\www\raselswedens\wp-admin\admin-ajax.php(203): do_action('wp_ajax_nopriv_...')
+#4 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php on line 275
+
+2023-02-17T16:53:31+00:00 CRITICAL Uncaught Error: Call to undefined function get_price() in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php:275
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(308): filter_products_by_category('')
+#1 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(332): WP_Hook->apply_filters('', Array)
+#2 C:\wamp64\www\raselswedens\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\wamp64\www\raselswedens\wp-admin\admin-ajax.php(203): do_action('wp_ajax_nopriv_...')
+#4 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php on line 275
+
+2023-02-17T16:53:43+00:00 CRITICAL Uncaught Error: Call to undefined function get_price() in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php:275
+Stack trace:
+#0 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(308): filter_products_by_category('')
+#1 C:\wamp64\www\raselswedens\wp-includes\class-wp-hook.php(332): WP_Hook->apply_filters('', Array)
+#2 C:\wamp64\www\raselswedens\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\wamp64\www\raselswedens\wp-admin\admin-ajax.php(203): do_action('wp_ajax_nopriv_...')
+#4 {main}
+  thrown in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php on line 275
+
+2023-02-17T17:04:30+00:00 CRITICAL require_once(): Failed opening required 'C:\wamp64\www\raselswedens/wp-content/themes/astra/template-parts/wocommerce_products' (include_path='.;C:\php\pear') in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php on line 208
+
+2023-02-17T17:04:52+00:00 CRITICAL syntax error, unexpected '<', expecting end of file in C:\wamp64\www\raselswedens\wp-content\themes\astra\functions.php on line 210
+
+2023-02-17T17:28:34+00:00 CRITICAL Cannot redeclare filter_products_by_category() (previously declared in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php:6) in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php on line 76
+
+2023-02-17T17:28:38+00:00 CRITICAL Cannot redeclare filter_products_by_category() (previously declared in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php:6) in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php on line 76
+
+2023-02-17T17:28:53+00:00 CRITICAL Cannot redeclare filter_products_by_category() (previously declared in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php:6) in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php on line 76
+
+2023-02-17T17:30:01+00:00 CRITICAL Cannot redeclare filter_products_by_category() (previously declared in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php:6) in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php on line 76
+
+2023-02-17T17:30:53+00:00 CRITICAL Cannot redeclare filter_products_by_category() (previously declared in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php:6) in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php on line 76
+
+2023-02-17T17:30:57+00:00 CRITICAL Cannot redeclare filter_products_by_category() (previously declared in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php:6) in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php on line 76
+
+2023-02-17T17:30:57+00:00 CRITICAL Cannot redeclare filter_products_by_category() (previously declared in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php:6) in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php on line 76
+
+2023-02-17T17:30:59+00:00 CRITICAL Cannot redeclare filter_products_by_category() (previously declared in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php:6) in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php on line 76
+
+2023-02-17T17:31:00+00:00 CRITICAL Cannot redeclare filter_products_by_category() (previously declared in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php:6) in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php on line 76
+
+2023-02-17T17:31:01+00:00 CRITICAL Cannot redeclare filter_products_by_category() (previously declared in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php:6) in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php on line 76
+
+2023-02-17T17:31:01+00:00 CRITICAL Cannot redeclare filter_products_by_category() (previously declared in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php:6) in C:\wamp64\www\raselswedens\wp-content\themes\astra\template-parts\wocommerce_products\product_filter.php on line 76
+
