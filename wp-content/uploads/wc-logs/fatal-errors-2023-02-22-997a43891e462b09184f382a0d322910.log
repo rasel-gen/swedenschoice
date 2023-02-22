@@ -1,0 +1,2 @@
+2023-02-22T06:06:02+00:00 CRITICAL Out of memory (allocated 41943040) (tried to allocate 20480 bytes) in C:\xampp\htdocs\raselswedens\wp-includes\functions.php on line 651
+

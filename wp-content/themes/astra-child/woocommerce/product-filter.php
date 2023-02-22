@@ -216,3 +216,12 @@ function filter_products_by_color()
     }
 
 }
+
+
+// product price
+add_action( 'woocommerce_before_shop_loop', 'custom_price_filter', 30 );
+function custom_price_filter() {
+    if ( is_shop() || is_product_category() || is_product_tag() ) {
+        woocommerce_price_filter();
+    }
+}
