@@ -81,6 +81,14 @@
                 <?php wp_nav_menu(array('theme_location' => 'footer-menu-5', 'container_class' => 'menu_1')); ?>
             </div>
         </div>
+        <div class="widgets">
+            <?php if (is_active_sidebar('sidebar-1')) : ?>
+                <div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+                    <?php astra_get_sidebar('sidebar-1'); ?>
+                </div><!-- #primary-sidebar -->
+            <?php endif; ?>
+
+        </div>
     </div>
 </footer>
 
@@ -293,35 +301,122 @@
     </div>
 </div>
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.2/sweetalert2.min.js"></script>
 <script>
+
+    window.addEventListener("load", function () {
+        const loader = document.getElementById("loader-wrapper");
+        loader.style.display = "none";
+    });
+
+
     jQuery(document).ready(function ($) {
+
+        var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
+
         $(".owl-carousel").owlCarousel({
             items: 3,
             loop: true,
             margin: 10,
             autoplay: true,
-            autoplayTimeout: 1000,
-            autoplayHoverPause: true
+            autoplayTimeout: 2000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 2,
+                    nav: false
+                },
+                600: {
+                    items: 2,
+                    nav: true
+                },
+                1000: {
+                    items: 4,
+                    nav: false,
+                    loop: true
+                }
+            }
         });
 
-        $(".size_scale .size_guide").on('click',function (){
-            $(".size_guide_details").css("display","block");
+        $(".size_scale .size_guide").on('click', function () {
+            $(".size_guide_details").css("display", "block");
         });
-        $(".size_guide_details .size_guide_close").on('click',function (){
-            $(".size_guide_details").css("display","none").fade();
+        $(".size_guide_details .size_guide_close").on('click', function () {
+            $(".size_guide_details").css("display", "none").fade();
         })
 
 
-        $(".last_visited").on('click',function (){
-            $(".lastest_visit_details").css("display","block");
+        $(".last_visited").on('click', function () {
+            $(".lastest_visit_details").css("display", "block");
         });
 
-        $(".lastest_visit_details .lastest_visit_close").on('click',function (){
-            $(".lastest_visit_details").css("display","none").fade();
+        $(".lastest_visit_details .lastest_visit_close").on('click', function () {
+            $(".lastest_visit_details").css("display", "none").fade();
         });
 
+        // product information
+        $('.tab-button').click(function () {
+            // Get the ID of the tab to show
+            var tab_id = $(this).attr('data-tab');
 
+            // Remove active class from all buttons and content elements
+            $('.tab-button').removeClass('active');
+            $('.tab-content').removeClass('active');
+
+            // Add active class to the clicked button and associated content element
+            $(this).addClass('active');
+            $('#' + tab_id).addClass('active');
+        });
+
+        //     on hover picture change
+        $('.product_lists .product_image').hover(
+            function () {
+                $(this).find('.product_image').show();
+                $(this).find('.attachment-shop_catalog').hide();
+            },
+            function () {
+                $(this).find('.hover-image').hide();
+                $(this).find('.attachment-shop_catalog').show();
+            }
+        );
+
+        $('body').on('click', '.single_add_to_cart_button', function () {
+            var variation_id = $('#variation_id').val();
+            var productId = $(this).val();
+            console.log(productId);
+            // alert("Hi");
+
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo esc_url(admin_url('admin-ajax.php')); ?>',
+                data: {
+                    action: 'woocommerce_ajax_add_to_cart',
+                    product_id: productId,
+                    quantity: 1,
+                    variation_id: variation_id,
+                },
+                success: function (response) {
+                    Swal.fire({
+                        // title: "Product Added",
+                        text: "Your product successfully added to cart",
+                        icon: "success",
+                        button: "Aww yiss!",
+                    });
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+
+        $('.res_menu').on('click', function () {
+            $(".offcanvas-menu").toggle();
+        })
     });
+
 </script>
-</script>
+<?php wp_footer() ?>
+</body>
+</html>

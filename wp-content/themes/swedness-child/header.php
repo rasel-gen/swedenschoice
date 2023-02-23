@@ -16,29 +16,38 @@ if (!defined('ABSPATH')) {
 
 ?>
 <!DOCTYPE html>
-<?php astra_html_before(); ?>
 <html <?php language_attributes(); ?>>
 
 <head>
-    <?php astra_head_top(); ?>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
-    <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+    <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.2/sweetalert2.min.css">
     <?php wp_head(); ?>
-
 </head>
 
 <body <?php astra_schema_body(); ?> <?php body_class(); ?>>
-
+<div id="loader-wrapper">
+    <div id="loader"></div>
+</div>
 <!-- website header -->
 <div class="web_header">
     <div class="container">
         <header>
             <div class="website_left">
+                <div class="res_menu">
+
+                    <a href="javascript:void(0)" class="toggle-offcanvas-menu">
+
+                        <span class="screen-reader-text"><?php esc_html_e( 'Toggle Menu', 'astra' ); ?></span>
+
+                        <svg width="20px" height="16px" fill="currentColor" viewBox="0 0 20 16"><g id="Assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g id="Icons" transform="translate(-242 -52)" fill-rule="nonzero" stroke="#0C1214"><g id="Icon/04-Menu/Menu" transform="translate(240 48)"><path d="M2.5 19.5h19m-19-7.497h19M2.5 4.5h19" id="🎨-Line-Weight" vector-effect="non-scaling-stroke"></path></g></g></g></svg>
+                    </a>
+                </div>
                 <div class="website_logo">
                     <?php
                     if (function_exists('the_custom_logo')) {
@@ -73,14 +82,14 @@ if (!defined('ABSPATH')) {
                     <span>3.2M Followers</span>
 
                 </div>
-<!--                <div class="country">-->
-<!--                    <div class="icon">-->
-<!--                        <i class="fas fa-flag" aria-hidden="true"></i>-->
-<!--                    </div>-->
-<!--                    <span>-->
-<!--                        Country-->
-<!--                    </span>-->
-<!--                </div>-->
+                <!--                <div class="country">-->
+                <!--                    <div class="icon">-->
+                <!--                        <i class="fas fa-flag" aria-hidden="true"></i>-->
+                <!--                    </div>-->
+                <!--                    <span>-->
+                <!--                        Country-->
+                <!--                    </span>-->
+                <!--                </div>-->
                 <div class="signin">
                     <div class="icon">
                         <span>
@@ -148,3 +157,9 @@ if (!defined('ABSPATH')) {
 
     </div>
 </div>
+
+<div class="offcanvas-menu-overlay"></div>
+<div class="offcanvas-menu">
+    <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false ) ); ?>
+</div>
+

@@ -12,82 +12,54 @@ get_header();
                 <div class="product_page_element">
                     <div class="col-lg-3">
                         <h4>Browse Products</h4>
-                        <?php
-                        $terms = get_terms(
-                            array(
-                                'taxonomy' => 'product_cat',
-                                'hide_empty' => false,
-                                'pad_counts' => true,
+                        <div class="product_categories">
+                            <?php
+                            $terms = get_terms(
+                                array(
+                                    'taxonomy' => 'product_cat',
+                                    'hide_empty' => false,
+                                    'pad_counts' => true,
 
-                            )
-                        );
-
-                        foreach ($terms as $term):
-                            // You can access the term's properties, such as its name, slug, and ID, like this:
-                            $term_name = $term->name;
-                            $term_slug = $term->slug;
-                            $term_id = $term->term_id;
-                            $term_count = $term->count;
-                            // Do something with the term, such as displaying its name and link:
-                            ?>
-
-                            <ul>
-                                <li>
-                                    <a data-taxonomy="<?php echo $term_name; ?>" class="product_filter"
-                                       href="#"><?php echo $term_name; ?><span class="price_count">
+                                )
+                            );
+                            foreach ($terms as $term):
+                                // You can access the term's properties, such as its name, slug, and ID, like this:
+                                $term_name = $term->name;
+                                $term_slug = $term->slug;
+                                $term_id = $term->term_id;
+                                $term_count = $term->count;
+                                // Do something with the term, such as displaying its name and link:
+                                ?>
+                                <ul>
+                                    <li>
+                                        <a data-taxonomy="<?php echo $term_name; ?>" class="product_filter"
+                                           href="#"><?php echo $term_name; ?><span class="price_count">
 										<?php echo $term_count; ?>
 									</span> </a>
 
-                                </li>
-                            </ul>
-
-                        <?php
-                        endforeach;
-
-                        $args = array(
-                            'post_type' => 'product_variation',
-                            'post_status' => 'publish',
-                            'posts_per_page' => -1,
-                            'add_to_cart' => true,
-                        );
-
-                        $variations = get_posts($args);
-                        foreach ($variations as $variation) {
-                            $variation_id = $variation->ID;
-                            $variation_product_id = wp_get_post_parent_id($variation_id);
-                            $variation_product = wc_get_product($variation_product_id);
-                            // Do something with the variation or its parent product, such as displaying its name and price:
-                            echo $variation_product->get_name();
-                        }
-                        ?>
-
+                                    </li>
+                                </ul>
+                            <?php
+                            endforeach;
+                            ?>
+                        </div>
                     </div>
 
                     <div class="col-lg-9">
+
                         <div class="filter">
                             <div class="price_filter">
                                 <div class="filter_header">
+                                    <?php if ( is_active_widget( false, false, 'astra_price_filter', true ) ) : ?>
+                                        <div class="widget widget_price_filter">
+                                            <?php the_widget( 'Astra_Price_Filter_Widget' ); ?>
+                                        </div>
+                                    <?php endif; ?>
+
                                     <a href="#">Price</a>
                                     <span> <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></span>
                                 </div>
                                 <div class="price_filter_dropdown">
-                                    <div class="price-content">
-                                        <div>
-                                            <label>Min</label>
-                                            <p id="min-value">$50</p>
-                                        </div>
-
-                                        <div>
-                                            <label>Max</label>
-                                            <p id="max-value">$500</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="range-slider">
-                                        <input type="range" class="min-price" value="100" min="10" max="500" step="10">
-                                        <input type="range" class="max-price" value="250" min="10" max="500" step="10">
-                                    </div>
-
                                 </div>
                             </div>
                             <div class="size_filter">
@@ -114,9 +86,8 @@ get_header();
                                         $attribute_id = $attribute->term_id;
 
                                         ?>
-                                        <a href="#">
-                                            <?php echo $attribute_name; ?>
-                                        </a>
+                                        <a data-taxonomy="<?php echo $attribute_name; ?>" class="size_filter_attribute"
+                                           href="#"><?php echo $attribute_name; ?></a>
                                         <?php
                                     }
                                     ?>
@@ -272,21 +243,36 @@ get_header();
 
                                     ?>
                                     <div class="products">
+
                                         <div class="product_image">
-                                            <?php echo astra_get_post_thumbnail(); ?>
+                                            <a href="<?php echo get_permalink($product_id); ?>">
+                                                <?php echo the_post_thumbnail(); ?></a>
                                             <div class="variations">
                                                 <div class="product_variations">
                                                     <div class="sizes">
-                                                        <select name="" id="">
-                                                            <option value="">Select Size</option>
-                                                            <option value="Black">Black</option>
-                                                            <option value="White">White</option>
-                                                            <option value="Pink">Pink</option>
-                                                        </select>
+                                                        <?php
+                                                        if ($product->is_type('variable')) {
+                                                            $variations = $product->get_available_variations();
+                                                            $sizes = array();
+                                                            foreach ($variations as $variation) {
+                                                                $size = $variation['attributes']['attribute_pa_size'];
+                                                                if (!in_array($size, $sizes)) {
+                                                                    $sizes[] = $size;
+                                                                }
+                                                            }
+                                                            if (!empty($sizes)) {
+                                                                echo '<select>';
+                                                                foreach ($sizes as $size) {
+                                                                    echo '<option>' . ucfirst($size) . '</option>';
+                                                                }
+                                                                echo '</select>';
+                                                            }
+                                                        }
+                                                        ?>
                                                     </div>
                                                     <div class="quick_shop">
-                                                        <a href="<?php echo get_permalink($product_id); ?>">Add to
-                                                            Cart</a>
+                                                        <a href="<?php echo get_permalink($product_id); ?>">View
+                                                            Product</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -294,7 +280,7 @@ get_header();
                                         <div class="product_description">
                                             <div class="product_title">
                                                 <h6>
-                                                    <?php echo the_title(); ?>
+                                                    <a href="<?php echo get_permalink($product_id); ?>"><?php echo the_title(); ?></a>
                                                 </h6>
                                                 <div class="product_attributes">
                                                     <?php
@@ -344,6 +330,7 @@ get_header();
         jQuery(document).ready(function ($) {
             var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
 
+            // category filter
             $('.category_filter').click(function (event) {
 
 
@@ -378,6 +365,7 @@ get_header();
 
             });
 
+            // attribute filter
             $('.attribute_filter').click(function (event) {
                 if (event.preventDefault) {
                     event.preventDefault();
@@ -409,6 +397,8 @@ get_header();
 
             });
 
+
+            // color filter
             $('.color_filter_attribute').click(function (event) {
                 if (event.preventDefault) {
                     event.preventDefault();
@@ -440,7 +430,7 @@ get_header();
 
             });
 
-
+            // category filter
             $('.product_filter').click(function (event) {
 
                 if (event.preventDefault) {
@@ -455,6 +445,40 @@ get_header();
                 var data = {
                     action: 'filter_products_by_category',
                     category: selecetd_taxonomy,
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: ajaxurl,
+                    data: data,
+                    beforeSend: function () {
+                        $('.product_lists').html('<p>Loading...</p>');
+                    },
+                    success: function (response) {
+                        $('.product_lists').html(response);
+                    },
+                    error: function () {
+                        $('.product_lists').html('<p>Something went wrong.</p>');
+                    }
+                });
+
+            });
+
+            // size filter
+            $('.size_filter_attribute').click(function (event) {
+
+                if (event.preventDefault) {
+                    event.preventDefault();
+                } else {
+                    event.returnValue = false;
+                }
+
+                var selecetd_taxonomy = $(this).attr('data-taxonomy');
+                console.log(selecetd_taxonomy);
+
+                var data = {
+                    action: 'filter_products_by_size',
+                    size: selecetd_taxonomy,
                 };
 
                 $.ajax({
