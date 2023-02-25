@@ -50,9 +50,9 @@ get_header();
                         <div class="filter">
                             <div class="price_filter">
                                 <div class="filter_header">
-                                    <?php if ( is_active_widget( false, false, 'astra_price_filter', true ) ) : ?>
+                                    <?php if (is_active_widget(false, false, 'astra_price_filter', true)) : ?>
                                         <div class="widget widget_price_filter">
-                                            <?php the_widget( 'Astra_Price_Filter_Widget' ); ?>
+                                            <?php the_widget('Astra_Price_Filter_Widget'); ?>
                                         </div>
                                     <?php endif; ?>
 
@@ -87,7 +87,7 @@ get_header();
 
                                         ?>
                                         <a data-taxonomy="<?php echo $attribute_name; ?>" class="size_filter_attribute"
-                                           href="#"><?php echo $attribute_name; ?></a>
+                                           href="javascript:void(0)"><?php echo $attribute_name; ?></a>
                                         <?php
                                     }
                                     ?>
@@ -117,7 +117,7 @@ get_header();
 
                                         ?>
                                         <a data-taxonomy="<?php echo $attribute_name; ?>" class="color_filter_attribute"
-                                           href="#"><?php echo $attribute_name; ?></a>
+                                           href="javascript:void(0)"><?php echo $attribute_name; ?></a>
                                         <?php
                                     }
                                     ?>
@@ -125,7 +125,7 @@ get_header();
                             </div>
                             <div class="brand_filter">
                                 <div class="filter_header">
-                                    <a href="#">Brand</a>
+                                    <a href="javascript:void(0)">Brand</a>
                                     <span> <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></span>
                                 </div>
                                 <div class="brand_filter_dropdown">
@@ -221,11 +221,24 @@ get_header();
                         //                        );
                         //                    }
 
-                        $args = array(
-                            'post_type' => 'product',
-                            'post_status' => 'publish',
-                            'posts_per_page' => -1,
-                        );
+                        $category = get_queried_object();
+                        $category_slug = $category->slug;
+
+                        if ($category_slug) {
+                            // Query the products by category
+                            $args = array(
+                                'post_type' => 'product',
+                                'posts_per_page' => -1,
+                                'product_cat' => $category_slug,
+                            );
+                        } else {
+                            $args = array(
+                                'post_type' => 'product',
+                                'post_status' => 'publish',
+                                'posts_per_page' => -1,
+                            );
+
+                        }
 
                         ?>
 
@@ -241,10 +254,28 @@ get_header();
                                     $product = wc_get_product(get_the_ID());
                                     $attributes = $product->get_attributes();
 
+                                    $regular_price = $product->get_regular_price();
+                                    $sale_price = $product->get_sale_price();
+
+                                    if ($sale_price) {
+                                        $discount = get_discount_percentage($regular_price, $sale_price);
+                                        $discount = '<span class="onsale">' . esc_html__($discount, 'woocommerce') . '</span>';
+                                    } else {
+                                        $discount = 0;
+                                    }
+
                                     ?>
                                     <div class="products">
 
                                         <div class="product_image">
+                                            <?php
+                                            $product_id = get_the_ID();
+                                            $product_gallery_images = get_post_meta($product_id, '_product_image_gallery', true);
+
+                                            if ($discount) {
+                                                echo $discount;
+                                            }
+                                            ?>
                                             <a href="<?php echo get_permalink($product_id); ?>">
                                                 <?php echo the_post_thumbnail(); ?></a>
                                             <div class="variations">
@@ -275,6 +306,9 @@ get_header();
                                                             Product</a>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="liked_button" product-data="<?php echo $product_id; ?>">
+                                                <i class="fa fa-light fa-heart"></i>
                                             </div>
                                         </div>
                                         <div class="product_description">
@@ -332,8 +366,6 @@ get_header();
 
             // category filter
             $('.category_filter').click(function (event) {
-
-
                 if (event.preventDefault) {
                     event.preventDefault();
                 } else {
@@ -341,8 +373,6 @@ get_header();
                 }
 
                 var selecetd_taxonomy = $(this).attr('data-taxonomy');
-                console.log(selecetd_taxonomy);
-
                 var data = {
                     action: 'filter_products_by_category',
                     category: selecetd_taxonomy,
@@ -357,6 +387,7 @@ get_header();
                     },
                     success: function (response) {
                         $('.product_lists').html(response);
+                        $(".brand_filter_dropdown").fadeOut();
                     },
                     error: function () {
                         $('.product_lists').html('<p>Something went wrong.</p>');
@@ -389,6 +420,7 @@ get_header();
                     },
                     success: function (response) {
                         $('.product_lists').html(response);
+                        $(".material_filter_dropdown").fadeOut();
                     },
                     error: function () {
                         $('.product_lists').html('<p>Something went wrong.</p>');
@@ -397,7 +429,18 @@ get_header();
 
             });
 
-
+            $(".color_filter").click(function () {
+                $(".color_filter_dropdown").fadeIn();
+            });
+            $(".size_filter").click(function () {
+                $(".size_filter_dropdown").fadeIn();
+            });
+            $(".material_filter").click(function () {
+                $(".material_filter_dropdown").fadeIn();
+            });
+            $(".brand_filter").click(function () {
+                $(".brand_filter_dropdown").fadeIn();
+            });
             // color filter
             $('.color_filter_attribute').click(function (event) {
                 if (event.preventDefault) {
@@ -422,6 +465,7 @@ get_header();
                     },
                     success: function (response) {
                         $('.product_lists').html(response);
+                        $(".color_filter_dropdown").fadeOut();
                     },
                     error: function () {
                         $('.product_lists').html('<p>Something went wrong.</p>');
@@ -490,6 +534,7 @@ get_header();
                     },
                     success: function (response) {
                         $('.product_lists').html(response);
+                        $(".size_filter_dropdown").fadeOut();
                     },
                     error: function () {
                         $('.product_lists').html('<p>Something went wrong.</p>');
@@ -497,6 +542,21 @@ get_header();
                 });
 
             });
+
+
+            $('.liked_button').on('click', function (e) {
+                e.preventDefault();
+                var product_id = $(this).data('product-id');
+                var data = {
+                    action: 'add_to_wishlist',
+                    product_id: product_id
+                };
+                $.post(ajaxurl, data, function (response) {
+                    console.log(response);
+                });
+            });
+
+
         });
     </script>
 <?php

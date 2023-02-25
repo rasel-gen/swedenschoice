@@ -32,7 +32,7 @@ function my_custom_theme_enqueue_scripts() {
 /** custom logo */
 require('theme-functions/custom_logo.php');
 
-/** product filte */
+/** product filter */
 require('theme-parts/product-filter.php');
 
 /** last visited product store */
@@ -41,7 +41,8 @@ require('theme-parts/last_visited_products.php');
 /** add theme supports */
 require('theme-parts/theme_support.php');
 
+/** add theme supports */
+require('theme-parts/custom_page.php');
 
-/**
- * Astra off canvas
- */
+
+

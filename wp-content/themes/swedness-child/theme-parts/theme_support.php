@@ -85,4 +85,11 @@ function add_product_to_cart()
     }
 }
 
+/** get product discount */
+function get_discount_percentage($price, $sale_price) {
+    if ( $price && $sale_price ) {
+        $discount = round( ( $price - $sale_price ) / $price * 100 );
+        return '-'.$discount.'%';
+    }
+}
 

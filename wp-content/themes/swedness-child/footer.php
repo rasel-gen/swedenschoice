@@ -320,7 +320,7 @@
             items: 3,
             loop: true,
             margin: 10,
-            autoplay: true,
+            autoplay: false,
             autoplayTimeout: 2000,
             autoplayHoverPause: true,
             responsive: {
@@ -338,6 +338,15 @@
                     loop: true
                 }
             }
+        });
+
+        $(".product_image .owl-carousel").owlCarousel({
+            items: 4,
+            loop: true,
+            margin: 0,
+            autoplay: true,
+            autoplayTimeout: 2000,
+            autoplayHoverPause: true,
         });
 
         $(".size_scale .size_guide").on('click', function () {
@@ -370,17 +379,6 @@
             $('#' + tab_id).addClass('active');
         });
 
-        //     on hover picture change
-        $('.product_lists .product_image').hover(
-            function () {
-                $(this).find('.product_image').show();
-                $(this).find('.attachment-shop_catalog').hide();
-            },
-            function () {
-                $(this).find('.hover-image').hide();
-                $(this).find('.attachment-shop_catalog').show();
-            }
-        );
 
         $('body').on('click', '.single_add_to_cart_button', function () {
             var variation_id = $('#variation_id').val();
@@ -414,6 +412,9 @@
         $('.res_menu').on('click', function () {
             $(".offcanvas-menu").toggle();
         })
+
+
+
     });
 
 </script>

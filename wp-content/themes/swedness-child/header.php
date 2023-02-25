@@ -43,9 +43,19 @@ if (!defined('ABSPATH')) {
 
                     <a href="javascript:void(0)" class="toggle-offcanvas-menu">
 
-                        <span class="screen-reader-text"><?php esc_html_e( 'Toggle Menu', 'astra' ); ?></span>
+                        <span class="screen-reader-text"><?php esc_html_e('Toggle Menu', 'astra'); ?></span>
 
-                        <svg width="20px" height="16px" fill="currentColor" viewBox="0 0 20 16"><g id="Assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g id="Icons" transform="translate(-242 -52)" fill-rule="nonzero" stroke="#0C1214"><g id="Icon/04-Menu/Menu" transform="translate(240 48)"><path d="M2.5 19.5h19m-19-7.497h19M2.5 4.5h19" id="🎨-Line-Weight" vector-effect="non-scaling-stroke"></path></g></g></g></svg>
+                        <svg width="20px" height="16px" fill="currentColor" viewBox="0 0 20 16">
+                            <g id="Assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
+                               stroke-linecap="round" stroke-linejoin="round">
+                                <g id="Icons" transform="translate(-242 -52)" fill-rule="nonzero" stroke="#0C1214">
+                                    <g id="Icon/04-Menu/Menu" transform="translate(240 48)">
+                                        <path d="M2.5 19.5h19m-19-7.497h19M2.5 4.5h19" id="🎨-Line-Weight"
+                                              vector-effect="non-scaling-stroke"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
                     </a>
                 </div>
                 <div class="website_logo">
@@ -160,6 +170,6 @@ if (!defined('ABSPATH')) {
 
 <div class="offcanvas-menu-overlay"></div>
 <div class="offcanvas-menu">
-    <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false ) ); ?>
+    <?php wp_nav_menu(array('theme_location' => 'primary', 'container' => false)); ?>
 </div>
 
