@@ -23,11 +23,57 @@ function filter_products_by_category()
             while ($query->have_posts()):
                 $query->the_post();
                 global $product;
+                $product = wc_get_product(get_the_ID());
+                $attributes = $product->get_attributes();
+
+                $regular_price = $product->get_regular_price();
+                $sale_price = $product->get_sale_price();
+
+                if ($sale_price) {
+                    $discount = get_discount_percentage($regular_price, $sale_price);
+                    $discount = '<span class="onsale">' . esc_html__($discount, 'woocommerce') . '</span>';
+                } else {
+                    $discount = 0;
+                }
                 // Display the product information here
                 ?>
                 <div class="products">
                     <div class="product_image">
-                        <?php echo astra_get_post_thumbnail(); ?>
+                        <?php
+                        $product_id = get_the_ID();
+                        $product_gallery_images = get_post_meta($product_id, '_product_image_gallery', true);
+                        $attachment_ids = $product->get_gallery_image_ids();
+                        if ($discount) {
+                            echo $discount;
+                        }
+                        ?>
+                        <a href="<?php echo get_permalink($product_id); ?>">
+                            <!-- Slider main container -->
+                            <div class="swiper">
+                                <!-- Additional required wrapper -->
+                                <div class="swiper-wrapper">
+                                    <?php
+                                    if ($attachment_ids) {
+                                        foreach ($attachment_ids as $attachment_id) {
+                                            $image_url = wp_get_attachment_image_src( $attachment_id, 'full' );
+                                            $thumb_url = wp_get_attachment_image_src( $attachment_id, 'thumbnail' );
+                                            ?>
+                                            <div class="swiper-slide">
+                                                <a href="<?php echo get_permalink($product_id); ?>">
+                                                    <img src="<?php echo $image_url[0]; ?>" width="<?php echo $image_url[1]; ?>" height="<?php echo $image_url[2]; ?>" alt="">
+                                                </a>
+                                            </div>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                    <!-- Slides -->
+                                </div>
+                                <!-- If we need navigation buttons -->
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+                            </div>
+                        </a>
                         <div class="variations">
                             <div class="product_variations">
                                 <div class="sizes">
@@ -59,6 +105,9 @@ function filter_products_by_category()
                                     <a href="<?php echo get_permalink($product_id); ?>">View Product</a>
                                 </div>
                             </div>
+                        </div>
+                        <div class="liked_button" product-data="<?php echo $product_id; ?>">
+                            <i class="fa fa-light fa-heart"></i>
                         </div>
                     </div>
                     <div class="product_description">
@@ -348,16 +397,7 @@ function filter_products_by_size()
         die();
     }
 
-}
 
 
 
-
-// product price
-add_action('woocommerce_before_shop_loop', 'custom_price_filter', 30);
-function custom_price_filter()
-{
-    if (is_shop() || is_product_category() || is_product_tag()) {
-        woocommerce_price_filter();
-    }
 }

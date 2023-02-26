@@ -139,6 +139,7 @@ Template: astra
     bottom: 6px;
     transition: 0.4s ease-in-out all;
     transform: translateY(0px);
+    z-index: 10;
 }
 
 .product_page_element .col-lg-9 .products .product_variations {
@@ -220,7 +221,7 @@ Template: astra
     color: #282828;
 }
 
-.liked_button{
+.liked_button {
     position: absolute;
     right: 7px;
     bottom: 18px;
@@ -228,10 +229,13 @@ Template: astra
     background: #2e2e2e6b;
     border-radius: 50px;
     cursor: pointer;
+    z-index: 11;
 }
-.liked_button i{
+
+.liked_button i {
     color: #fff;
 }
+
 /* filter */
 .filter {
     width: 100%;
@@ -242,7 +246,7 @@ Template: astra
     font-weight: 700;
 }
 
-.display_toggle{
+.display_toggle {
     display: none !important;
 }
 
@@ -268,11 +272,13 @@ Template: astra
     position: absolute;
     padding: 12px;
     border: 1px solid #efefef;
-    width: 18%;
+    width: 100%;
     z-index: 10;
     background: #fdfdfd;
     margin-top: 13px;
     display: none;
+    top: 32px;
+
 }
 
 .filter .size_filter .size_filter_dropdown {
@@ -301,6 +307,11 @@ Template: astra
 .filter .color_filter:hover .color_filter_dropdown a {
     display: block;
     padding: 3px 14px;
+    border-bottom: 1px solid #ddd;
+}
+.filter .price_filter:hover .price_filter_dropdown{
+    display: block;
+    padding: 9px 14px;
     border-bottom: 1px solid #ddd;
 }
 
@@ -1201,6 +1212,12 @@ footer .footer_top_bottom .subscribe_bottom p {
 
 /* responsive */
 @media only screen and (max-width: 768px) {
+
+    .swiper {
+        width: 184px !important;
+        height: 335px !important;
+    }
+
     .web_header {
         position: fixed;
         top: 0;
@@ -1343,6 +1360,7 @@ footer .footer_top_bottom .subscribe_bottom p {
         flex: 1 0 0%;
         border-bottom: 1px solid #c3c3c3dd;
     }
+
 
     .filter .size_filter .size_filter_dropdown {
         position: absolute;
@@ -1490,6 +1508,7 @@ footer .footer_top_bottom .subscribe_bottom p {
     .web_header .res_menu {
         display: block;
     }
+
     .offcanvas-menu {
         display: none;
         position: fixed;
@@ -1508,6 +1527,7 @@ footer .footer_top_bottom .subscribe_bottom p {
     .offcanvas-menu .ast-icon, .offcanvas-menu icon-arrow {
         display: none;
     }
+
     .web_header .res_menu:hover {
         cursor: pointer;
     }
@@ -1528,6 +1548,7 @@ footer .footer_top_bottom .subscribe_bottom p {
         height: 100%;
         overflow-y: scroll;
     }
+
     .offcanvas-menu ul {
         list-style: none;
         margin: 9px 0px;
@@ -1575,23 +1596,27 @@ footer .footer_top_bottom .subscribe_bottom p {
         flex-direction: column-reverse;
         margin: 14px;
     }
+
     .product_page_element .col-lg-9 .products:hover .variations {
         width: 100%;
         display: block;
         transition: 0.4s ease-in-out all;
         transform: translateY(-9px);
     }
+
     .product_page_element .col-lg-9 .variations .sizes {
         width: 100%;
     }
-    .product_page_element .col-lg-9 .variations .sizes select{
+
+    .product_page_element .col-lg-9 .variations .sizes select {
         width: 100%;
     }
+
     .product_page_element .col-lg-9 .variations .quick_shop {
         width: 100%;
     }
 
-    .product_variations .sizes p{
+    .product_variations .sizes p {
         font-size: 11px;
         font-weight: 600;
         color: #fff;
@@ -1605,3 +1630,27 @@ footer .footer_top_bottom .subscribe_bottom p {
 }
 
 
+/* sliders */
+.swiper {
+    width: 316px;
+    height: 369px;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+    font-family: swiper-icons;
+    font-size: 13px;
+    text-transform: none !important;
+    letter-spacing: 0;
+    font-variant: initial;
+    line-height: 1;
+    color: #000;
+    font-weight: 700;
+}
+
+.yith-wcwl-add-to-wishlist {
+    margin-top: 0px !important;
+}
+
+.hidden-title-form button i, .wishlist-title a.show-title-form i, .wishlist_manage_table tfoot a.create-new-wishlist i, .wishlist_manage_table tfoot button.submit-wishlist-changes i, .wishlist_table .add_to_cart.button i, .wishlist_table .ask-an-estimate-button i, .yith-wcwl-add-button>a i, .yith-wcwl-wishlist-new button i, .yith-wcwl-wishlist-search-form button.wishlist-search-button i {
+    margin-right: 0px !important;
+}

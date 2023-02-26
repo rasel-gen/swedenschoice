@@ -50,16 +50,16 @@ get_header();
                         <div class="filter">
                             <div class="price_filter">
                                 <div class="filter_header">
-                                    <?php if (is_active_widget(false, false, 'astra_price_filter', true)) : ?>
-                                        <div class="widget widget_price_filter">
-                                            <?php the_widget('Astra_Price_Filter_Widget'); ?>
-                                        </div>
-                                    <?php endif; ?>
-
                                     <a href="#">Price</a>
                                     <span> <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></span>
                                 </div>
                                 <div class="price_filter_dropdown">
+                                    <?php if (is_active_sidebar('custom-price-filter-widget-area')) : ?>
+                                        <div class="custom-price-filter-widget-area">
+                                            <?php dynamic_sidebar('custom-price-filter-widget-area'); ?>
+                                        </div>
+                                    <?php endif; ?>
+
                                 </div>
                             </div>
                             <div class="size_filter">
@@ -209,20 +209,8 @@ get_header();
 
 
                         $category = get_queried_object();
-                        $category_name = $category->name;
+                        $category_slug = $category->slug ?: null;
 
-                        //                    if ($category_name) {
-                        //                        $args['tax_query'] = array(
-                        //                            array(
-                        //                                'taxonomy' => 'product_cat',
-                        //                                'field' => 'slug',
-                        //                                'terms' => $category_name,
-                        //                            ),
-                        //                        );
-                        //                    }
-
-                        $category = get_queried_object();
-                        $category_slug = $category->slug;
 
                         if ($category_slug) {
                             // Query the products by category
@@ -230,6 +218,41 @@ get_header();
                                 'post_type' => 'product',
                                 'posts_per_page' => -1,
                                 'product_cat' => $category_slug,
+                            );
+                        } else if (isset($_GET['min_price']) && isset($_GET['max_price']) && is_numeric($_GET['min_price']) && is_numeric($_GET['max_price'])) {
+
+                            $min_price = intval($_GET['min_price']);
+                            $max_price = intval($_GET['max_price']);
+
+                            $args = array(
+                                'post_type' => 'product',
+                                'posts_per_page' => 10,
+                                'orderby' => 'date',
+                                'order' => 'DESC',
+                                'meta_query' => array(
+                                    array(
+                                        'key' => '_price',
+                                        'value' => array($min_price, $max_price),
+                                        'compare' => 'BETWEEN',
+                                        'type' => 'NUMERIC'
+                                    )
+                                )
+                            );
+                        } else if (isset($_GET['max_price'])) {
+                            $max_price = intval($_GET['max_price']);
+                            $args = array(
+                                'post_type' => 'product',
+                                'posts_per_page' => 10,
+                                'orderby' => 'date',
+                                'order' => 'DESC',
+                                'meta_query' => array(
+                                    array(
+                                        'key' => '_price',
+                                        'value' => $max_price,
+                                        'type' => 'numeric',
+                                        'compare' => '<=',
+                                    ),
+                                )
                             );
                         } else {
                             $args = array(
@@ -247,6 +270,8 @@ get_header();
                             $query = new WP_Query($args);
                             if ($query->have_posts()) {
                                 while ($query->have_posts()):
+
+
                                     $query->the_post();
                                     // Display the product information here
                                     global $product;
@@ -268,16 +293,45 @@ get_header();
                                     <div class="products">
 
                                         <div class="product_image">
+
                                             <?php
                                             $product_id = get_the_ID();
                                             $product_gallery_images = get_post_meta($product_id, '_product_image_gallery', true);
-
+                                            $attachment_ids = $product->get_gallery_image_ids();
                                             if ($discount) {
                                                 echo $discount;
                                             }
                                             ?>
                                             <a href="<?php echo get_permalink($product_id); ?>">
-                                                <?php echo the_post_thumbnail(); ?></a>
+                                                <!-- Slider main container -->
+                                                <div class="swiper">
+                                                    <!-- Additional required wrapper -->
+                                                    <div class="swiper-wrapper">
+                                                        <?php
+                                                        if ($attachment_ids) {
+                                                            foreach ($attachment_ids as $attachment_id) {
+                                                                $image_url = wp_get_attachment_image_src($attachment_id, 'full');
+                                                                $thumb_url = wp_get_attachment_image_src($attachment_id, 'thumbnail');
+                                                                ?>
+                                                                <div class="swiper-slide">
+                                                                    <a href="<?php echo get_permalink($product_id); ?>">
+                                                                        <img src="<?php echo $image_url[0]; ?>"
+                                                                             width="<?php echo $image_url[1]; ?>"
+                                                                             height="<?php echo $image_url[2]; ?>"
+                                                                             alt="">
+                                                                    </a>
+                                                                </div>
+                                                                <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <!-- Slides -->
+                                                    </div>
+                                                    <!-- If we need navigation buttons -->
+                                                    <div class="swiper-button-prev"></div>
+                                                    <div class="swiper-button-next"></div>
+                                                </div>
+                                            </a>
                                             <div class="variations">
                                                 <div class="product_variations">
                                                     <div class="sizes">
@@ -308,13 +362,21 @@ get_header();
                                                 </div>
                                             </div>
                                             <div class="liked_button" product-data="<?php echo $product_id; ?>">
-                                                <i class="fa fa-light fa-heart"></i>
+                                            <!-- <a href="<?php echo esc_url( add_query_arg( 'add_to_wishlist', $product_id ) ); ?>" class="my-custom-button">
+                                                <i class="fa fa-light fa-heart"></i></a> -->
+                                                <?php 
+                                                echo do_shortcode( '[yith_wcwl_add_to_wishlist]' );
+
+                                                ?>
+
                                             </div>
                                         </div>
                                         <div class="product_description">
                                             <div class="product_title">
                                                 <h6>
-                                                    <a href="<?php echo get_permalink($product_id); ?>"><?php echo the_title(); ?></a>
+                                                    <a href="<?php echo get_permalink($product_id); ?>"><?php
+                                                        echo $product->get_title();
+                                                        ?></a>
                                                 </h6>
                                                 <div class="product_attributes">
                                                     <?php
