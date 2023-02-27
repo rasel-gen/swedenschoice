@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Swednes Theme functions and definitions
  * @package Swednes
@@ -55,24 +56,28 @@ require('theme-parts/theme_support.php');
 /** add theme supports */
 require('theme-parts/custom_page.php');
 
+/** display cart items */
+require('theme-parts/cart_items.php');
 
 
-function my_price_filitering_widget_area() {
-    register_sidebar( array(
-        'name'          => __( 'Price Filtering Widet', 'swednes' ),
+function my_price_filitering_widget_area()
+{
+    register_sidebar(array(
+        'name'          => __('Price Filtering Widet', 'swednes'),
         'id'            => 'custom-price-filter-widget-area',
         'before_widget' => '<div class="widget">',
         'after_widget'  => '</div>',
         'before_title'  => '<h3 class="widget-title">',
         'after_title'   => '</h3>',
-    ) );
+    ));
 }
-add_action( 'widgets_init', 'my_price_filitering_widget_area' );
+add_action('widgets_init', 'my_price_filitering_widget_area');
 
 
 
 //wish list
-add_action( 'woocommerce_after_add_to_cart_button', 'my_add_to_wishlist_button' );
-function my_add_to_wishlist_button() {
-   echo do_shortcode( '[yith_wcwl_add_to_wishlist]' );
+add_action('woocommerce_after_add_to_cart_button', 'my_add_to_wishlist_button');
+function my_add_to_wishlist_button()
+{
+    echo do_shortcode('[yith_wcwl_add_to_wishlist]');
 }
