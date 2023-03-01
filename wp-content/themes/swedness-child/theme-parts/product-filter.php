@@ -133,279 +133,178 @@ function filter_products_by_category()
     }
 }
 
-/** product filter by material */
-add_action('wp_ajax_filter_products_by_attributes', 'filter_products_by_attributes');
-add_action('wp_ajax_nopriv_filter_products_by_attributes', 'filter_products_by_attributes');
-function filter_products_by_attributes()
+
+
+
+// Ajax filter products by attributes
+add_action('wp_ajax_custom_search_filter', 'custom_search_filter_ajax');
+add_action('wp_ajax_nopriv_custom_search_filter', 'custom_search_filter_ajax');
+function custom_search_filter_ajax()
 {
-    if (isset($_POST['attribute']) && !empty($_POST['attribute'])) {
-
-
-        $args = array(
-            'post_type' => 'product',
-            'posts_per_page' => -1,
-            'tax_query' => array(
-                array(
-                    'taxonomy' => 'pa_material',
-                    // replace with the name of the attribute you want to query
-                    'field' => 'slug',
-                    // you can use 'term_id', 'name', or 'slug'
-                    'terms' => $_POST['attribute'] // replace with the attribute value you want to query
-                )
+    $search_terms = $_POST['terms'];
+    $taxonomy = $_POST['taxonomy'];
+    $category_id = $_POST['category_id'];
+    $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => -1,
+        'tax_query' => array(
+            array(
+                'taxonomy' => $taxonomy,
+                'field' => 'name',
+                'terms' => $search_terms
             )
-        );
+        ),
+        // 'meta_query' => array(
+        //     array(
+        //         'key' => 'pa_size',
+        //         'value' => 'your-size-value',
+        //         'compare' => 'IN',
+        //     )),
+    );
 
+    $query = new WP_Query($args);
+    if ($query->have_posts()) {
+        while ($query->have_posts()) :
+            $query->the_post();
+            global $product;
 
-        $query = new WP_Query($args);
-
-
-        if ($query->have_posts()) {
-            while ($query->have_posts()) :
-                $query->the_post();
-                global $product;
             ?>
-                <div class="products">
-                    <div class="product_image">
-                        <?php echo astra_get_post_thumbnail(); ?>
-                        <div class="variations">
-                            <div class="product_variations">
-                                <div class="sizes">
-                                    <?php
-                                    if ($product->is_type('variable')) {
-                                        $variations = $product->get_available_variations();
-                                        $sizes = array();
-                                        foreach ($variations as $variation) {
-                                            $size = $variation['attributes']['attribute_pa_size'];
-                                            if (!in_array($size, $sizes)) {
-                                                $sizes[] = $size;
-                                            }
-                                        }
-                                        if (!empty($sizes)) {
-                                            echo '<select>';
-                                            foreach ($sizes as $size) {
-                                                echo '<option>' . ucfirst($size) . '</option>';
-                                            }
-                                            echo '</select>';
+            <div class="products">
+
+                <div class="product_image">
+
+                    <?php
+                    $product_id = get_the_ID();
+                    $product_gallery_images = get_post_meta($product_id, '_product_image_gallery', true);
+                    $attachment_ids = $product->get_gallery_image_ids();
+                    if ($discount) {
+                        echo $discount;
+                    }
+                    ?>
+                    <a href="<?php echo get_permalink($product_id); ?>">
+                        <!-- Slider main container -->
+                        <div class="swiper">
+                            <!-- Additional required wrapper -->
+                            <div class="swiper-wrapper">
+                                <?php
+                                if ($attachment_ids) {
+                                    foreach ($attachment_ids as $attachment_id) {
+                                        $image_url = wp_get_attachment_image_src($attachment_id, 'full');
+                                        $thumb_url = wp_get_attachment_image_src($attachment_id, 'thumbnail');
+                                ?>
+                                        <div class="swiper-slide">
+                                            <a href="<?php echo get_permalink($product_id); ?>">
+                                                <img src="<?php echo $image_url[0]; ?>" width="<?php echo $image_url[1]; ?>" height="<?php echo $image_url[2]; ?>" alt="">
+                                            </a>
+                                        </div>
+                                <?php
+                                    }
+                                }
+                                ?>
+                                <!-- Slides -->
+                            </div>
+                            <!-- If we need navigation buttons -->
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    </a>
+                    <div class="variations">
+                        <div class="product_variations">
+                            <div class="sizes">
+                                <?php
+                                if ($product->is_type('variable')) {
+                                    $variations = $product->get_available_variations();
+                                    $sizes = array();
+                                    foreach ($variations as $variation) {
+                                        $size = $variation['attributes']['attribute_pa_size'];
+                                        if (!in_array($size, $sizes)) {
+                                            $sizes[] = $size;
                                         }
                                     }
-                                    ?>
-                                </div>
-                                <div class="quick_shop">
-                                    <a href="<?php echo get_permalink(); ?>">View Product</a>
-                                </div>
+                                    if (!empty($sizes)) {
+                                        echo '<select>';
+                                        foreach ($sizes as $size) {
+                                            echo '<option>' . ucfirst($size) . '</option>';
+                                        }
+                                        echo '</select>';
+                                    }
+                                }
+                                ?>
+                            </div>
+                            <div class="quick_shop">
+                                <a href="<?php echo get_permalink($product_id); ?>">View
+                                    Product</a>
                             </div>
                         </div>
                     </div>
-                    <div class="product_description">
-                        <div class="product_title">
-                            <h6>
-                                <?php echo the_title(); ?>
-                            </h6>
-                        </div>
-                        <div class="product_price">
-                            <h5>
-                                <?php
-                                echo $product->get_price_html(); ?>
-                            </h5>
-                        </div>
+                    <div class="liked_button" product-data="<?php echo $product_id; ?>">
+                        <!-- <a href="<?php echo esc_url(add_query_arg('add_to_wishlist', $product_id)); ?>" class="my-custom-button">
+                <i class="fa fa-light fa-heart"></i></a> -->
+                        <?php
+                        echo do_shortcode('[yith_wcwl_add_to_wishlist]');
+
+                        ?>
+
                     </div>
                 </div>
-
-            <?php
-            endwhile;
-            wp_reset_postdata();
-        }
-        die();
-    }
-}
-
-
-/** product filter by material */
-add_action('wp_ajax_filter_products_by_color', 'filter_products_by_color');
-add_action('wp_ajax_nopriv_filter_products_by_color', 'filter_products_by_color');
-function filter_products_by_color()
-{
-    if (isset($_POST['color']) && !empty($_POST['color'])) {
-
-
-        $args = array(
-            'post_type' => 'product',
-            'posts_per_page' => -1,
-            'tax_query' => array(
-                array(
-                    'taxonomy' => 'pa_color',
-                    // replace with the name of the attribute you want to query
-                    'field' => 'slug',
-                    // you can use 'term_id', 'name', or 'slug'
-                    'terms' => $_POST['color'] // replace with the attribute value you want to query
-                )
-            )
-        );
-
-
-        $query = new WP_Query($args);
-
-
-        if ($query->have_posts()) {
-            while ($query->have_posts()) :
-                $query->the_post();
-                global $product;
-            ?>
-                <div class="products">
-                    <div class="product_image">
-                        <?php echo astra_get_post_thumbnail(); ?>
-                        <div class="variations">
-                            <div class="product_variations">
-                                <div class="sizes">
-                                    <?php
-                                    if ($product->is_type('variable')) {
-                                        $variations = $product->get_available_variations();
-                                        $sizes = array();
-                                        foreach ($variations as $variation) {
-                                            $size = $variation['attributes']['attribute_pa_size'];
-                                            if (!in_array($size, $sizes)) {
-                                                $sizes[] = $size;
-                                            }
-                                        }
-                                        if (!empty($sizes)) {
-                                            echo '<select>';
-                                            foreach ($sizes as $size) {
-                                                echo '<option>' . ucfirst($size) . '</option>';
-                                            }
-                                            echo '</select>';
-                                        }
-                                    }
-                                    ?>
-                                </div>
-                                <div class="quick_shop">
-                                    <a href="<?php echo get_permalink($product_id); ?>">View Product</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="liked_button" product-data="<?php echo $product_id; ?>">
+                <div class="product_description">
+                    <div class="product_title">
+                        <h6>
+                            <a href="<?php echo get_permalink($product_id); ?>"><?php echo $product->get_title(); ?></a>
+                        </h6>
+                        <div class="product_attributes">
                             <?php
-                            echo do_shortcode('[yith_wcwl_add_to_wishlist]');
-                            ?>
-
-                        </div>
-                    </div>
-                    <div class="product_description">
-                        <div class="product_title">
-                            <h6>
-                                <?php echo the_title(); ?>
-                            </h6>
-                        </div>
-                        <div class="product_price">
-                            <h5>
-                                <?php
-                                echo $product->get_price_html(); ?>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-
-            <?php
-            endwhile;
-            wp_reset_postdata();
-        }
-        die();
-    }
-}
-
-
-
-/** product filter by size */
-add_action('wp_ajax_filter_products_by_size', 'filter_products_by_size');
-add_action('wp_ajax_nopriv_filter_products_by_size', 'filter_products_by_size');
-function filter_products_by_size()
-{
-
-    if (isset($_POST['size']) && !empty($_POST['size'])) {
-
-
-        $args = array(
-            'post_type' => 'product',
-            'posts_per_page' => -1,
-            'tax_query' => array(
-                array(
-                    'taxonomy' => 'pa_size',
-                    // replace with the name of the attribute you want to query
-                    'field' => 'slug',
-                    // you can use 'term_id', 'name', or 'slug'
-                    'terms' => $_POST['size'] // replace with the attribute value you want to query
-                )
-            )
-        );
-
-
-        $query = new WP_Query($args);
-
-
-        if ($query->have_posts()) {
-            while ($query->have_posts()) :
-                $query->the_post();
-                global $product;
-            ?>
-                <div class="products">
-                    <div class="product_image">
-                        <?php echo astra_get_post_thumbnail(); ?>
-                        <div class="variations">
-                            <div class="product_variations">
-                                <div class="sizes">
-                                    <?php
-                                    if ($product->is_type('variable')) {
-                                        $variations = $product->get_available_variations();
-                                        $sizes = array();
-                                        foreach ($variations as $variation) {
-                                            $size = $variation['attributes']['attribute_pa_size'];
-                                            if (!in_array($size, $sizes)) {
-                                                $sizes[] = $size;
-                                            }
-                                        }
-                                        if (!empty($sizes)) {
-                                            echo '<select>';
-                                            foreach ($sizes as $size) {
-                                                echo '<option>' . ucfirst($size) . '</option>';
-                                            }
-                                            echo '</select>';
-                                        }
+                            $categories = get_the_terms($product->get_id(), 'product_cat');
+                            if ($categories && !is_wp_error($categories)) {
+                                echo '<div class="product-categories">';
+                                foreach ($categories as $category) {
+                                    echo '<a href="' . get_term_link($category->slug, 'product_cat') . '">' . $category->name . '</a>';
+                                    if ($category !== end($categories)) {
+                                        echo ', ';
                                     }
-                                    ?>
-                                </div>
-                                <div class="quick_shop">
-                                    <a href="<?php echo get_permalink($product_id); ?>">View Product</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="liked_button" product-data="<?php echo $product_id; ?>">
-                            <?php
-                            echo do_shortcode('[yith_wcwl_add_to_wishlist]');
+                                }
+                                echo '</div>';
+                            }
                             ?>
+                        </div>
+                        <div class="product_colors">
+                            <?php
+                            $product = wc_get_product($product_id);
 
+                            // Get the available color attributes for the product
+                            $color_attributes = $product->get_attribute('pa_color');
+                            // Convert the color attributes string to an array
+                            $color_attributes_array = explode(',', $color_attributes);
+                            foreach ($color_attributes_array as $color_attribute) {
+
+                            ?>
+                                <div class="colors" style="width: 11px; height: 11px; background: <?php echo $color_attribute;  ?>;border-radius: 50%">
+                                </div>
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
-                    <div class="product_description">
-                        <div class="product_title">
-                            <h6>
-                                <?php echo the_title(); ?>
-                            </h6>
-                        </div>
-                        <div class="product_price">
-                            <h5>
-                                <?php
-                                echo $product->get_price_html(); ?>
-                            </h5>
-                        </div>
+                    <div class="product_price">
+                        <h5>
+                            <?php
+                            echo $product->get_price_html(); ?>
+                        </h5>
                     </div>
+
+
                 </div>
+            </div>
 
             <?php
-            endwhile;
-            wp_reset_postdata();
-        }
-        die();
+        endwhile;
+    } else {
+        default_products();
     }
 }
+
+
+
 
 
 /** product filter by size */
@@ -514,10 +413,172 @@ function filter_by_sorting()
                     </div>
                 </div>
 
-<?php
+        <?php
             endwhile;
             wp_reset_postdata();
         }
         die();
     }
+}
+
+
+//show the default products
+function default_products()
+{
+    $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => -1,
+    );
+    $query = new WP_Query($args);
+
+    while ($query->have_posts()) :
+
+
+        $query->the_post();
+        // Display the product information here
+        global $product;
+
+        $product = wc_get_product(get_the_ID());
+        $attributes = $product->get_attributes();
+
+        $regular_price = $product->get_regular_price();
+        $sale_price = $product->get_sale_price();
+
+        if ($sale_price) {
+            $discount = get_discount_percentage($regular_price, $sale_price);
+            $discount = '<span class="onsale">' . esc_html__($discount, 'woocommerce') . '</span>';
+        } else {
+            $discount = 0;
+        }
+
+        ?>
+        <div class="products">
+
+            <div class="product_image">
+
+                <?php
+                $product_id = get_the_ID();
+                $product_gallery_images = get_post_meta($product_id, '_product_image_gallery', true);
+                $attachment_ids = $product->get_gallery_image_ids();
+                if ($discount) {
+                    echo $discount;
+                }
+                ?>
+                <a href="<?php echo get_permalink($product_id); ?>">
+                    <!-- Slider main container -->
+                    <div class="swiper">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            <?php
+                            if ($attachment_ids) {
+                                foreach ($attachment_ids as $attachment_id) {
+                                    $image_url = wp_get_attachment_image_src($attachment_id, 'full');
+                                    $thumb_url = wp_get_attachment_image_src($attachment_id, 'thumbnail');
+                            ?>
+                                    <div class="swiper-slide">
+                                        <a href="<?php echo get_permalink($product_id); ?>">
+                                            <img src="<?php echo $image_url[0]; ?>" width="<?php echo $image_url[1]; ?>" height="<?php echo $image_url[2]; ?>" alt="">
+                                        </a>
+                                    </div>
+                            <?php
+                                }
+                            }
+                            ?>
+                            <!-- Slides -->
+                        </div>
+                        <!-- If we need navigation buttons -->
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </a>
+                <div class="variations">
+                    <div class="product_variations">
+                        <div class="sizes">
+                            <?php
+                            if ($product->is_type('variable')) {
+                                $variations = $product->get_available_variations();
+                                $sizes = array();
+                                foreach ($variations as $variation) {
+                                    $size = $variation['attributes']['attribute_pa_size'];
+                                    if (!in_array($size, $sizes)) {
+                                        $sizes[] = $size;
+                                    }
+                                }
+                                if (!empty($sizes)) {
+                                    echo '<select>';
+                                    foreach ($sizes as $size) {
+                                        echo '<option>' . ucfirst($size) . '</option>';
+                                    }
+                                    echo '</select>';
+                                }
+                            }
+                            ?>
+                        </div>
+                        <div class="quick_shop">
+                            <a href="<?php echo get_permalink($product_id); ?>">View
+                                Product</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="liked_button" product-data="<?php echo $product_id; ?>">
+                    <!-- <a href="<?php echo esc_url(add_query_arg('add_to_wishlist', $product_id)); ?>" class="my-custom-button">
+                        <i class="fa fa-light fa-heart"></i></a> -->
+                    <?php
+                    echo do_shortcode('[yith_wcwl_add_to_wishlist]');
+
+                    ?>
+
+                </div>
+            </div>
+            <div class="product_description">
+                <div class="product_title">
+                    <h6>
+                        <a href="<?php echo get_permalink($product_id); ?>"><?php echo $product->get_title(); ?></a>
+                    </h6>
+                    <div class="product_attributes">
+                        <?php
+                        $categories = get_the_terms($product->get_id(), 'product_cat');
+                        if ($categories && !is_wp_error($categories)) {
+                            echo '<div class="product-categories">';
+                            foreach ($categories as $category) {
+                                echo '<a href="' . get_term_link($category->slug, 'product_cat') . '">' . $category->name . '</a>';
+                                if ($category !== end($categories)) {
+                                    echo ', ';
+                                }
+                            }
+                            echo '</div>';
+                        }
+                        ?>
+                    </div>
+                    <div class="product_colors">
+                        <?php
+                        $product = wc_get_product($product_id);
+
+                        // Get the available color attributes for the product
+                        $color_attributes = $product->get_attribute('pa_color');
+                        // Convert the color attributes string to an array
+                        $color_attributes_array = explode(',', $color_attributes);
+                        foreach ($color_attributes_array as $color_attribute) {
+
+                        ?>
+                            <div class="colors" style="width: 11px; height: 11px; background: <?php echo $color_attribute;  ?>;border-radius: 50%">
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="product_price">
+                    <h5>
+                        <?php
+                        echo $product->get_price_html(); ?>
+                    </h5>
+                </div>
+
+
+            </div>
+        </div>
+
+<?php
+    endwhile;
 }

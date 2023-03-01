@@ -215,6 +215,83 @@
         });
 
 
+        jQuery(function($) {
+            $('#size-filter-form input').on('change', function(event) {
+                event.preventDefault();
+                var data = $('#size-filter-form').serialize();;
+                $.ajax({
+                    url: ajaxurl,
+                    type: 'POST',
+                    data: data + '&action=custom_search_filter',
+                    beforeSend: function() {
+                        // Show loading spinner
+                    },
+                    success: function(response) {
+                        $('.product_lists').html(response);
+                    },
+                    complete: function() {
+                        // Hide loading spinner
+                    }
+                });
+            });
+
+            $(".filter_reset .close").on('click', function() {
+                $(".size_filter_dropdown").hide();
+            });
+        });
+
+
+        jQuery(function($) {
+            $('#color-filter-form input').on('change', function(event) {
+                event.preventDefault();
+                var data = $('#color-filter-form').serialize();
+                $.ajax({
+                    url: ajaxurl,
+                    type: 'POST',
+                    data: data + '&action=custom_search_filter',
+                    beforeSend: function() {
+                        // Show loading spinner
+                    },
+                    success: function(response) {
+                        $('.product_lists').html(response);
+                    },
+                    complete: function() {
+                        // Hide loading spinner
+                    }
+                });
+            });
+
+            $(".filter_reset .close").on('click', function() {
+                $(".color_filter_dropdown").hide();
+            });
+        });
+
+
+        jQuery(function($) {
+            $('#material-filter-form input').on('change', function(event) {
+                event.preventDefault();
+                var data = $('#material-filter-form').serialize();
+                $.ajax({
+                    url: ajaxurl,
+                    type: 'POST',
+                    data: data + '&action=custom_search_filter',
+                    beforeSend: function() {
+                        // Show loading spinner
+                    },
+                    success: function(response) {
+                        $('.product_lists').html(response);
+                    },
+                    complete: function() {
+                        // Hide loading spinner
+                    }
+                });
+            });
+
+            $(".filter_reset .close").on('click', function() {
+                $(".color_filter_dropdown").hide();
+            });
+        });
+
 
         $('.liked_button').on('click', function(e) {
             e.preventDefault();
@@ -227,6 +304,16 @@
                 console.log(response);
             });
         });
+
+        jQuery(document).ready(function($) {
+                // Listen for the click event of the reset button
+                $('.reset_button').click(function(e) {
+                    // Prevent the default button click behavior
+                    e.preventDefault();
+                    // Reset the filter parameters by reloading the current page
+                    window.location.href = window.location.origin + window.location.pathname;
+                });
+            });
 
 
     });

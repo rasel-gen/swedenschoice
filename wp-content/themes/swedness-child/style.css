@@ -14,6 +14,11 @@ Template: astra
   margin: 0 !important;
   padding: 0 !important;
 } */
+
+a:focus {
+  border-bottom: none !important;
+}
+
 .web_header {
   position: fixed;
   top: 0;
@@ -22,6 +27,7 @@ Template: astra
   z-index: 999;
   background: #fff;
   width: 100%;
+  padding-top: 16px;
 }
 
 .web_header header {
@@ -83,10 +89,14 @@ Template: astra
 
 /* website header end */
 
+.wrapper {
+  margin-top: 113px;
+}
+
 /* product */
 .product_page {
   width: 100%;
-  margin: 135px auto;
+  margin: 0px;
 }
 
 .product_page_element {
@@ -301,17 +311,20 @@ Template: astra
 }
 .filter .size_filter .size_filter_dropdown a:focus,
 filter .size_filter .size_filter_dropdown a:active {
-  border: 1px solid;
+  border: 1px solid #fff !important;
 }
 .filter .color_filter .color_filter_dropdown {
   position: absolute;
   padding: 12px;
   border: 1px solid #efefef;
-  width: 18.7%;
+  width: 322px;
+  line-height: 38px;
+  height: 251px;
   z-index: 10;
   background: #fdfdfd;
   margin-top: 0px;
   display: none;
+  overflow-x: scroll;
 }
 
 .filter .color_filter:hover .color_filter_dropdown a {
@@ -353,7 +366,7 @@ filter .size_filter .size_filter_dropdown a:active {
   border: 1px solid #efefef;
   background: #fdfdfd;
   margin-top: 1px;
-  z-index: 10;
+  z-index: 12;
   right: 0px;
   transition: 0.5s ease-in-out;
   width: 100%;
@@ -361,7 +374,7 @@ filter .size_filter .size_filter_dropdown a:active {
 }
 
 .filter .brand_filter .brand_filter_dropdown .brand_filter_dropdown_items {
-  border: 1px solid #efefef;
+  border: 0px solid #efefef;
   background: #fdfdfd;
   display: flex;
   gap: 44px;
@@ -374,11 +387,11 @@ filter .size_filter .size_filter_dropdown a:active {
 }
 
 .filter .brand_filter .brand_filter_dropdown .d-flex .brand_filter_left_side {
-  width: 45%;
+  width: 100%;
 }
 
 .filter .brand_filter .brand_filter_dropdown .d-flex .brand_filter_right_side {
-  width: 55%;
+  display: none;
 }
 
 .filter
@@ -386,12 +399,22 @@ filter .size_filter .size_filter_dropdown a:active {
   .brand_filter_dropdown
   .brand_filter_dropdown_items
   .items {
-  flex: 44%;
-  padding: 3%;
+  padding: 16px;
   border: 1px solid #ddd;
   text-align: center;
+  width: 220px;
+  height: 127px;
 }
-
+.filter
+  .brand_filter
+  .brand_filter_dropdown
+  .brand_filter_dropdown_items
+  .items
+  img {
+  display: block;
+  width: 180px;
+  text-align: center;
+}
 .filter
   .brand_filter
   .brand_filter_dropdown
@@ -399,7 +422,14 @@ filter .size_filter .size_filter_dropdown a:active {
   .items:hover {
   background: #ededed;
 }
-
+.filter
+  .brand_filter
+  .brand_filter_dropdown
+  .brand_filter_dropdown_items
+  .category_name {
+  width: 100%;
+  display: block;
+}
 .search_input input[type="text"] {
   width: 100%;
   padding: 7px 15px;
@@ -414,7 +444,8 @@ filter .size_filter .size_filter_dropdown a:active {
 .filter .material_filter {
   position: relative;
   background-color: #fff;
-  z-index: 10;
+
+  z-index: 12;
 }
 
 .filter .material_filter .material_filter_dropdown {
@@ -422,14 +453,15 @@ filter .size_filter .size_filter_dropdown a:active {
   flex-direction: column;
   position: absolute;
   background-color: #fff;
-  z-index: 10;
-  width: 100%;
-  right: 10px;
+  z-index: 12;
+  width: 250px;
+  right: -51px;
   line-height: 36px;
   height: 251px;
   overflow: scroll;
   overflow-x: hidden;
   display: none;
+  padding-left: 16px;
 }
 
 .filter .material_filter:hover .material_filter_dropdown {
@@ -450,7 +482,7 @@ filter .size_filter .size_filter_dropdown a:active {
 .filter .sort_filter {
   position: relative;
   background-color: #fff;
-  z-index: 10;
+  z-index: 12;
 }
 
 .filter .sort_filter .sort_filter_dropdown {
@@ -458,7 +490,7 @@ filter .size_filter .size_filter_dropdown a:active {
   flex-direction: column;
   position: absolute;
   background-color: #fff;
-  z-index: 10;
+  z-index: 12;
   width: 100%;
   right: 10px;
   line-height: 36px;
@@ -486,7 +518,7 @@ filter .size_filter .size_filter_dropdown a:active {
 .filter .size_filter {
   position: relative;
   background-color: #fff;
-  z-index: 10;
+  z-index: 12;
 }
 
 .filter .size_filter .size_filter_dropdown {
@@ -494,8 +526,8 @@ filter .size_filter .size_filter_dropdown a:active {
   flex-direction: column;
   position: absolute;
   background-color: #fff;
-  z-index: 10;
-  width: 100%;
+  z-index: 12;
+  width: 322px;
   right: 10px;
   line-height: 36px;
   height: 251px;
@@ -510,14 +542,28 @@ filter .size_filter .size_filter_dropdown a:active {
 
 .filter .size_filter:hover .size_filter_dropdown a {
   display: block;
-  padding: 3px 14px;
-  border-bottom: 1px solid #ddd;
+  /* padding: 3px 14px; */
+  /* border-bottom: 1px solid #ddd; */
+  margin-top: 18px;
 }
 
 .filter .size_filter:hover .size_filter_dropdown a:hover {
   background: #ededed;
 }
-
+.filter_reset {
+  display: flex;
+  justify-content: space-between;
+}
+.filter_reset a {
+  text-decoration: none;
+  border-bottom: 0px;
+  background-color: #fff;
+}
+.filter_reset a:hover a:focus {
+  background-color: #ffff !important;
+  color: #000000;
+  outline: none;
+}
 .price_count {
   font-size: 11px;
   color: #b5b5b5;
@@ -540,6 +586,12 @@ filter .size_filter .size_filter_dropdown a:active {
 
 .main_menu ul li a {
   position: relative;
+}
+
+.main_menu ul li a:hover a:focus {
+  color: #282828;
+  border-bottom: 1px solid !important;
+  padding-bottom: 3px;
 }
 
 .main_menu ul .sub-menu {
@@ -587,7 +639,6 @@ label {
 
 p {
   font-size: 16px;
-  font-weight: 600;
 }
 
 .range-slider {
@@ -741,7 +792,9 @@ footer .footer_top_bottom .subscribe_bottom p {
 .signin {
   position: relative;
 }
-
+.signin:hover {
+  background-color: #0ec1ae;
+}
 .signin .auth_screen::before {
   content: "";
   width: 13px;
@@ -760,21 +813,23 @@ footer .footer_top_bottom .subscribe_bottom p {
 }
 
 .signin:hover .auth_screen {
-  visibility: visible;
+  display: inline-flex;
   cursor: pointer;
 }
 
 .signin .auth_screen {
-  display: flex;
+  display: none;
   gap: 15px;
   position: absolute;
-  left: -72px;
+  left: -74px;
   background: #fff;
   padding: 9px 15px;
   border: 1px solid;
-  top: 35px;
-  visibility: hidden;
+  top: 29px;
   z-index: 5;
+}
+.signin .auth_screen a:hover {
+  color: #0ec1ae;
 }
 
 /* last visited item */
@@ -919,6 +974,7 @@ body .woocommerce form.register {
   justify-content: space-between;
   gap: 10px;
   align-items: center;
+  position: relative;
 }
 
 .shopping_cart i,
@@ -936,14 +992,14 @@ body .woocommerce form.register {
   position: absolute;
   background: #fff;
   padding: 10px 14px;
-  top: 54px;
+  top: 30px;
   z-index: 5;
   width: 311px;
   box-shadow: 8px -4px 41px #e3e3e3;
-  right: 2px;
+  right: -85px;
 }
 
-.product_colors{
+.product_colors {
   display: inline-flex;
   gap: 8px;
 }
@@ -1432,6 +1488,15 @@ body .woocommerce form.register {
     border: 1px solid #fff;
   }
 
+  .filter {
+    width: 100%;
+    padding-bottom: 11px;
+    display: flex;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
   .filter .price_filter,
   .filter .size_filter,
   .filter .color_filter,
@@ -1443,9 +1508,9 @@ body .woocommerce form.register {
 
   .filter .size_filter .size_filter_dropdown {
     position: absolute;
-    padding: 0;
+    padding-left: 12px;
     border: 1px solid #efefef;
-    width: 147px;
+    width: 185px;
     z-index: 10;
     background: #fdfdfd;
     margin-top: -1px;
@@ -1455,13 +1520,29 @@ body .woocommerce form.register {
 
   .filter .color_filter .color_filter_dropdown {
     position: absolute;
-    padding: 0;
+    padding-left: 12px;
     border: 1px solid #efefef;
     width: 100%;
     z-index: 10;
     background: #fdfdfd;
     margin-top: -1px;
     display: none;
+    left: 0;
+  }
+
+  .filter .material_filter .material_filter_dropdown {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: #fff;
+    z-index: 12;
+    width: 100%;
+    line-height: 36px;
+    height: 184px;
+    overflow: scroll;
+    overflow-x: hidden;
+    display: none;
+    padding-left: 17px;
     left: 0;
   }
 
@@ -1624,7 +1705,7 @@ body .woocommerce form.register {
   .offcanvas-menu {
     display: none;
     position: fixed;
-    z-index: 12;
+    z-index: 15;
     background: #fff;
     top: 87px;
     width: 100%;
@@ -1705,6 +1786,22 @@ body .woocommerce form.register {
     color: #fff;
     text-align: center;
   }
+
+  .blog_aside {
+    margin-top: 18px;
+    width: 100%;
+    display: flex;
+    gap: 34px;
+    margin-bottom: 60px;
+    flex-direction: column;
+  }
+
+  .main_blogs article {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px !important;
+    flex-direction: column;
+  }
 }
 
 .woocommerce span.onsale,
@@ -1763,4 +1860,106 @@ body .woocommerce form.register {
 }
 .attr {
   border: 1px solid #000;
+}
+
+.size_filter label,
+.color_filter label,
+.material_filter label {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid #ddd;
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  align-items: center;
+}
+
+/* Hide the default checkbox */
+
+/* cart page */
+.btn_cart_coupon {
+  border: 1px solid #0ec1ae !important;
+  background: #0ec1ae !important;
+  color: #ffff;
+  width: 100% !important;
+}
+
+.coupon_input {
+  width: 220px !important;
+  padding: 16px 15px !important;
+  border: 1px dashed #0ec1ae !important;
+}
+/* carpte page end */
+
+/* blog */
+.blog_header {
+  color: #fff;
+  background: #0ec1ae;
+  text-align: center;
+  padding: 98px 0px;
+}
+.blog_header h3 {
+  color: #fff;
+}
+
+.blog_aside {
+  margin-top: 18px;
+  width: 88%;
+  display: flex;
+  gap: 37px;
+  margin-bottom: 60px;
+}
+
+.main_blogs {
+}
+.main_blogs article {
+  display: flex;
+  gap: 10px;
+  margin-top: 30px !important;
+}
+.main_blogs article .blog_image {
+  min-width: 295px;
+  margin-right: 20px;
+  max-width: 295px;
+  overflow: hidden;
+  border-radius: 10px;
+  height: 344px;
+}
+
+.main_blogs article .blog_image img {
+  width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  height: 100%;
+}
+
+.main_blogs article .blog_content {
+  /* border: 1px solid #0ec1ae; */
+  padding: 32px 30px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  border-radius: 2px;
+  box-shadow: 0px 4px 12px #ddddddbf;
+}
+
+.current-menu-item {
+  font-weight: bold;
+  border-bottom: 2px solid #282828;
+}
+
+.single_post_header {
+  padding: 7% 0%;
+  text-align: center;
+  background-size: cover !important;
+  border-bottom: 5px solid;
+}
+
+.single_post {
+  padding-bottom: 50px;
+}
+
+.main_post{
+  text-align: justify;
 }

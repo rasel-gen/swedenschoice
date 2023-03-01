@@ -49,6 +49,8 @@ function display_cart_items()
 
 <?php
         }
+    } else {
+        echo "Cart is empty";
     }
 }
 

@@ -32,9 +32,9 @@ if (!defined('ABSPATH')) {
 </head>
 
 <body <?php astra_schema_body(); ?> <?php body_class(); ?>>
-    <!-- <div id="loader-wrapper">
+    <div id="loader-wrapper">
         <div id="loader"></div>
-    </div> -->
+    </div>
     <!-- website header -->
     <div class="web_header">
         <div class="container">
@@ -148,7 +148,7 @@ if (!defined('ABSPATH')) {
                         <div class="visited_item">
                             <div class="display_last_visited_products">
                                 <?php
-                                display_cart_items();
+                                    display_cart_items();
                                 ?>
                             </div>
                         </div>

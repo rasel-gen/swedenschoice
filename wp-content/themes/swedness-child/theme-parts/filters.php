@@ -20,30 +20,30 @@
         </div>
 
         <div class="size_filter_dropdown">
-            <?php
-            // Get all product attributes
-            $attributes = get_terms(
-                array(
+            <form id="size-filter-form">
+                <input type="text" hidden value="<?php echo get_queried_object_id(); ?>" name="category_id">
+                <input type="text" hidden value="pa_size" name="taxonomy">
+                <?php
+                $terms = get_terms(array(
                     'taxonomy' => 'pa_size',
-                    'hide_empty' => false,
-                    'order_by' => 'ASC',
-                    'add_to_cart' => true,
-                )
-            );
+                    'hide_empty' => true,
+                ));
+                if ($terms) {
+                    foreach ($terms as $term) {
+                ?>
+                        <label>
+                            <input type="checkbox" name="terms[]" value="<?php echo esc_attr($term->slug); ?>" />
+                            <?php echo esc_html($term->name); ?>
+                        </label>
+                <?php
+                    }
+                }
+                ?>
+            </form>
 
-            // Loop through the attributes
-            foreach ($attributes as $attribute) {
-                $attribute_name = $attribute->name;
-                $attribute_id = $attribute->term_id;
-
-            ?>
-                <a data-taxonomy="<?php echo $attribute_name; ?>" class="size_filter_attribute" href="javascript:void(0)"><?php echo $attribute_name; ?></a>
-            <?php
-            }
-            ?>
             <div class="filter_reset">
-                <a href="javascript:void(0)">Reset Filter</a>
-                <a href="javascript:void(0)">Close</a>
+                <a class="reset_button" href="javascript:void(0)">Reset Filter</a>
+                <a class="close" href="javascript:void(0)">Close</a>
             </div>
 
         </div>
@@ -55,27 +55,39 @@
             <span> <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></span>
         </div>
         <div class="color_filter_dropdown">
-            <?php
-            // Get all product attributes
-            $attributes = get_terms(
-                array(
-                    'taxonomy' => 'pa_color',
-                    'hide_empty' => false,
-                    'order' => 'ASC',
-                    'add_to_cart' => true,
-                )
-            );
+            <form id="color-filter-form">
+                <?php
+                $colors = get_terms(
+                    array(
+                        'taxonomy' => 'pa_color',
+                        'hide_empty' => false,
+                        'order' => 'ASC',
+                        'add_to_cart' => true,
+                    )
+                );
+                ?>
+                <input type="text" hidden value="pa_color" name="taxonomy">
 
-            // Loop through the attributes
-            foreach ($attributes as $attribute) {
-                $attribute_name = $attribute->name;
-                $attribute_id = $attribute->term_id;
+                <?php
+                if ($colors) {
+                    foreach ($colors as $color) {
+                ?>
+                        <label>
+                            <span style="width: 17px; height: 17px; background: <?php echo $color->name; ?>;border-radius: 50%; position: absolute;z-index: 51;left: 10px;"></span>
+                            <input type="checkbox" name="terms[]" value="<?php echo esc_attr($color->slug); ?>" />
+                            <?php echo esc_html($color->name); ?>
+                        </label>
+                <?php
+                    }
+                }
+                ?>
+            </form>
 
-            ?>
-                <a data-taxonomy="<?php echo $attribute_name; ?>" class="color_filter_attribute" href="javascript:void(0)"><?php echo $attribute_name; ?></a>
-            <?php
-            }
-            ?>
+            <div class="filter_reset">
+                <a class="reset_button" href="javascript:void(0)">Reset Filter</a>
+                <a class="close" href="javascript:void(0)">Close</a>
+            </div>
+
         </div>
     </div>
     <div class="brand_filter">
@@ -110,21 +122,23 @@
                             $subcategory_image_id = get_term_meta($subcategory_id, 'thumbnail_id', true);
                             $subcategory_image_url = wp_get_attachment_image_url($subcategory_image_id, 'full');
                         ?>
-                            <div class="items">
-                                <img src="<?php echo $subcategory_image_url; ?>" alt="">
-                                <a href="<?php echo esc_url(add_query_arg('category', $subcategory->name)); ?>" data-taxonomy="<?php echo $taxonomy_name; ?>" class="category_filter"><?php
-                                                                                                                                                                                        echo $subcategory->name; ?></a>
-                            </div>
+                            <a href="<?php echo esc_url(add_query_arg('category', $subcategory->name)); ?>" data-taxonomy="<?php echo $taxonomy_name; ?>" class="category_filter">
+                                <div class="items">
 
+                                    <img src="<?php echo $subcategory_image_url; ?>" alt="">
+                                    <span class="category_name">
+                                        <?php echo $subcategory->name; ?>
+                                    </span>
+                                </div>
+                            </a>
                         <?php } ?>
                     </div>
                 </div>
-                <div class="brand_filter_right_side">
+                <!-- <div class="brand_filter_right_side">
                     <div class="search_input">
                         <input type="text" placeholder="Search" class="form-control" />
-
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -134,26 +148,36 @@
             <span> <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></span>
         </div>
         <div class="material_filter_dropdown">
-            <?php
-            // Get all product attributes
-            $attributes = get_terms(
-                array(
-                    'taxonomy' => 'pa_material',
-                    'hide_empty' => false,
-                    'order_by' => 'ASC'
-                )
-            );
+            <form id="material-filter-form">
+                <?php
+                $materials = get_terms(
+                    array(
+                        'taxonomy' => 'pa_material',
+                        'hide_empty' => false,
+                        'order_by' => 'ASC'
+                    )
+                );
+                ?>
+                <input type="text" hidden value="pa_material" name="taxonomy">
+                <?php
+                if ($materials) {
+                    foreach ($materials as $material) {
+                ?>
+                        <label>
+                            <input type="checkbox" name="terms[]" value="<?php echo esc_attr($material->slug); ?>" />
+                            <?php echo esc_html($material->name); ?>
+                        </label>
+                <?php
+                    }
+                }
+                ?>
+            </form>
 
-            // Loop through the attributes
-            foreach ($attributes as $attribute) {
-                $attribute_name = $attribute->name;
-                $attribute_id = $attribute->term_id;
+            <div class="filter_reset">
+                <a class="reset_button" href="javascript:void(0)">Reset Filter</a>
+                <a class="close" href="javascript:void(0)">Close</a>
+            </div>
 
-            ?>
-                <a data-taxonomy="<?php echo $attribute_name; ?>" class="attribute_filter" href="#"><?php echo $attribute_name; ?></a>
-            <?php
-            }
-            ?>
         </div>
     </div>
     <div class="sort_filter">

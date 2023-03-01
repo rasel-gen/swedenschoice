@@ -178,13 +178,13 @@ get_header();
                     <?php the_content(); ?>
                 </div>
                 <div class="tab-content active" id="product_material">
-                    <?php echo get_post_meta(get_the_ID(), 'delivery', true); ?>
+                    <?php echo get_post_meta(get_the_ID(), 'material', true); ?>
                 </div>
                 <div class="tab-content" id="product_delivery_return">
                     <div class="pdr">
                         <div class="delivery">
                             <h6>Delivery</h6>
-                            <?php echo get_post_meta(get_the_ID(), 'returns', true); ?>
+                            <?php echo get_post_meta(get_the_ID(), 'deliveries', true); ?>
                         </div>
                         <div class="returns">
                             <h6>Return</h6>
@@ -220,6 +220,9 @@ get_header();
                 echo '</ul>';
                 echo '</div>';
             }
+
+
+
             ?>
 
         </div>
