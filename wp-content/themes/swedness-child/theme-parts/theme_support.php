@@ -45,6 +45,13 @@ function woocommerce_ajax_add_to_cart() {
             wc_add_to_cart_message(array($product_id => $quantity), true);
         }
 
+        $response = array(
+            'success' => true,
+            'message' => __( 'Product added to cart', 'mytheme' ),
+            'cart_count' => WC()->cart->get_cart_contents_count(),
+        );
+        wp_send_json_success( $response );
+        
         WC_AJAX :: get_refreshed_fragments();
     } else {
 

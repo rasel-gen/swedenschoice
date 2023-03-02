@@ -245,6 +245,9 @@
             $('#color-filter-form input').on('change', function(event) {
                 event.preventDefault();
                 var data = $('#color-filter-form').serialize();
+                $(this).prev().toggle({
+                    "border": "2px solid"
+                });
                 $.ajax({
                     url: ajaxurl,
                     type: 'POST',
@@ -306,14 +309,14 @@
         });
 
         jQuery(document).ready(function($) {
-                // Listen for the click event of the reset button
-                $('.reset_button').click(function(e) {
-                    // Prevent the default button click behavior
-                    e.preventDefault();
-                    // Reset the filter parameters by reloading the current page
-                    window.location.href = window.location.origin + window.location.pathname;
-                });
+            // Listen for the click event of the reset button
+            $('.reset_button').click(function(e) {
+                // Prevent the default button click behavior
+                e.preventDefault();
+                // Reset the filter parameters by reloading the current page
+                window.location.href = window.location.origin + window.location.pathname;
             });
+        });
 
 
     });

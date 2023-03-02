@@ -116,7 +116,7 @@ if (!defined('ABSPATH')) {
                     <div class="last_visited">
                         <div class="icon">
                             <span>
-                                <svg width="1.7em" height="30px" fill="currentColor" viewBox="0 0 24 23">
+                                <svg width="1.7em" height="1.7em" fill="currentColor" viewBox="0 0 24 23">
                                     <g id="Lined-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
                                         <g id="Icon/eye" fill-rule="nonzero" stroke="currentColor">
                                             <path d="M12 23.25c6.213 0 11.25-5.037 11.25-11.25S18.213.75 12 .75.75 5.787.75 12 5.787 23.25 12 23.25zm0-15.478c-2.687-.044-5.467 1.778-7.214 3.643a1.051 1.051 0 000 1.439C6.5 14.68 9.264 16.543 12 16.5c2.736.044 5.5-1.819 7.216-3.645a1.05 1.05 0 000-1.439C17.467 9.55 14.687 7.728 12 7.772zm0 5.863a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" id="🎨-Line-Weight"></path>
@@ -142,14 +142,12 @@ if (!defined('ABSPATH')) {
                         <div class="icon" id="my-cart-button">
                             <a href="<?php echo wc_get_cart_url(); ?>">
                                 <i class="fa fa-light fa-bag-shopping"></i>
-                                <?php echo sprintf(_n('%d item', '%d items', WC()->cart->get_cart_contents_count()), WC()->cart->get_cart_contents_count()); ?>
+                                <span class="cart_count"><?php echo sprintf(_n('%d item', '%d items', WC()->cart->get_cart_contents_count()), WC()->cart->get_cart_contents_count()); ?></span>
                             </a>
                         </div>
                         <div class="visited_item">
                             <div class="display_last_visited_products">
-                                <?php
-                                    display_cart_items();
-                                ?>
+                               <div class="cart_items_data"></div>
                             </div>
                         </div>
                     </div>

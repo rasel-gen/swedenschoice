@@ -73,7 +73,7 @@
                     foreach ($colors as $color) {
                 ?>
                         <label>
-                            <span style="width: 17px; height: 17px; background: <?php echo $color->name; ?>;border-radius: 50%; position: absolute;z-index: 51;left: 10px;"></span>
+                            <span class="filter_colors" style="width: 17px; height: 17px; background: <?php echo $color->name; ?>;border-radius: 50%; position: absolute;z-index: 51;left: 10px;"></span>
                             <input type="checkbox" name="terms[]" value="<?php echo esc_attr($color->slug); ?>" />
                             <?php echo esc_html($color->name); ?>
                         </label>

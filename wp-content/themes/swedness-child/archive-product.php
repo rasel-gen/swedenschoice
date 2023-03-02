@@ -178,28 +178,28 @@ get_header();
                                                 <div class="product_variations">
                                                     <div class="sizes">
                                                         <?php
-                                                        if ($product->is_type('variable')) {
-                                                            $variations = $product->get_available_variations();
-                                                            $sizes = array();
-                                                            foreach ($variations as $variation) {
-                                                                $size = $variation['attributes']['attribute_pa_size'];
-                                                                if (!in_array($size, $sizes)) {
-                                                                    $sizes[] = $size;
-                                                                }
-                                                            }
-                                                            if (!empty($sizes)) {
-                                                                echo '<select>';
-                                                                foreach ($sizes as $size) {
-                                                                    echo '<option>' . ucfirst($size) . '</option>';
-                                                                }
-                                                                echo '</select>';
-                                                            }
+                                                        if ($product->is_type('variable')) { ?>
+                                                            <select name="variation_id" id="variation_id">
+                                                                <?php
+                                                                foreach ($product->get_available_variations() as $variation) : ?>
+                                                                    <?php foreach ($variation['attributes'] as $attribute_name => $attribute_value) : ?>
+                                                                        <option value="<?php echo esc_attr($variation['variation_id']); ?>"><?php echo esc_html(ucfirst($attribute_value)); ?></option>
+                                                                    <?php endforeach; ?>
+                                                                <?php endforeach;
+
+                                                                ?>
+                                                            </select>
+
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <p>No choice</p>
+                                                        <?php
                                                         }
                                                         ?>
                                                     </div>
-                                                    <div class="quick_shop">
-                                                        <a href="<?php echo get_permalink($product_id); ?>">View
-                                                            Product</a>
+                                                    <div class="quick_shop" data-variation-id="" data-product-id="<?php echo $product_id; ?>">
+                                                        <a href="javascript:void(0)">Quick Shop</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -279,6 +279,6 @@ get_header();
     </div>
 </div>
 <!-- custom script -->
-<?php require_once('theme-functions/custom_scripts.php'); ?>
+
 <?php
 get_footer();

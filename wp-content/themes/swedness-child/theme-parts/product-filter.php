@@ -78,31 +78,28 @@ function filter_products_by_category()
                             <div class="product_variations">
                                 <div class="sizes">
                                     <?php
-                                    if ($product->is_type('variable')) {
-                                        $variations = $product->get_available_variations();
-                                        $sizes = array();
-                                        foreach ($variations as $variation) {
-                                            $size = $variation['attributes']['attribute_pa_size'];
-                                            if (!in_array($size, $sizes)) {
-                                                $sizes[] = $size;
-                                            }
-                                        }
-                                        if (!empty($sizes)) {
-                                            echo '<select>';
-                                            foreach ($sizes as $size) {
-                                                echo '<option>' . ucfirst($size) . '</option>';
-                                            }
-                                            echo '</select>';
-                                        }
+                                    if ($product->is_type('variable')) { ?>
+                                        <select name="variation_id" id="variation_id">
+                                            <?php
+                                            foreach ($product->get_available_variations() as $variation) : ?>
+                                                <?php foreach ($variation['attributes'] as $attribute_name => $attribute_value) : ?>
+                                                    <option value="<?php echo esc_attr($variation['variation_id']); ?>"><?php echo esc_html(ucfirst($attribute_value)); ?></option>
+                                                <?php endforeach; ?>
+                                            <?php endforeach;
+
+                                            ?>
+                                        </select>
+
+                                    <?php
                                     } else {
                                     ?>
-                                        <p>No Choice</p>
+                                        <p>No choice</p>
                                     <?php
                                     }
                                     ?>
                                 </div>
-                                <div class="quick_shop">
-                                    <a href="<?php echo get_permalink($product_id); ?>">View Product</a>
+                                <div class="quick_shop" data-variation-id="" data-product-id="<?php echo $product_id; ?>">
+                                    <a href="javascript:void(0)">Quick Shop</a>
                                 </div>
                             </div>
                         </div>
@@ -143,26 +140,32 @@ function custom_search_filter_ajax()
 {
     $search_terms = $_POST['terms'];
     $taxonomy = $_POST['taxonomy'];
-    $category_id = $_POST['category_id'];
+    $category_id = isset($_POST['category_id']) ? intval($_POST['category_id']) : 0;
+
     $args = array(
         'post_type' => 'product',
         'posts_per_page' => -1,
-        'tax_query' => array(
+        'tax_query'      => array(
             array(
                 'taxonomy' => $taxonomy,
-                'field' => 'name',
-                'terms' => $search_terms
-            )
+                'field'    => 'slug',
+                'terms'    => $search_terms,
+                'compare' => 'IN',
+            ),
         ),
-        // 'meta_query' => array(
+        // 'tax_query' => array(
         //     array(
-        //         'key' => 'pa_size',
-        //         'value' => 'your-size-value',
-        //         'compare' => 'IN',
-        //     )),
+        //         'taxonomy' => 'product_cat',
+        //         'field' => 'term_id',
+        //         'terms' => $category_id,
+        //         'include_children' => true, // include child categori
+        //     )
+        // )
     );
 
+
     $query = new WP_Query($args);
+
     if ($query->have_posts()) {
         while ($query->have_posts()) :
             $query->the_post();
@@ -212,28 +215,28 @@ function custom_search_filter_ajax()
                         <div class="product_variations">
                             <div class="sizes">
                                 <?php
-                                if ($product->is_type('variable')) {
-                                    $variations = $product->get_available_variations();
-                                    $sizes = array();
-                                    foreach ($variations as $variation) {
-                                        $size = $variation['attributes']['attribute_pa_size'];
-                                        if (!in_array($size, $sizes)) {
-                                            $sizes[] = $size;
-                                        }
-                                    }
-                                    if (!empty($sizes)) {
-                                        echo '<select>';
-                                        foreach ($sizes as $size) {
-                                            echo '<option>' . ucfirst($size) . '</option>';
-                                        }
-                                        echo '</select>';
-                                    }
+                                if ($product->is_type('variable')) { ?>
+                                    <select name="variation_id" id="variation_id">
+                                        <?php
+                                        foreach ($product->get_available_variations() as $variation) : ?>
+                                            <?php foreach ($variation['attributes'] as $attribute_name => $attribute_value) : ?>
+                                                <option value="<?php echo esc_attr($variation['variation_id']); ?>"><?php echo esc_html(ucfirst($attribute_value)); ?></option>
+                                            <?php endforeach; ?>
+                                        <?php endforeach;
+
+                                        ?>
+                                    </select>
+
+                                <?php
+                                } else {
+                                ?>
+                                    <p>No choice</p>
+                                <?php
                                 }
                                 ?>
                             </div>
-                            <div class="quick_shop">
-                                <a href="<?php echo get_permalink($product_id); ?>">View
-                                    Product</a>
+                            <div class="quick_shop" data-variation-id="" data-product-id="<?php echo $product_id; ?>">
+                                <a href="javascript:void(0)">Quick Shop</a>
                             </div>
                         </div>
                     </div>
@@ -298,9 +301,13 @@ function custom_search_filter_ajax()
 
             <?php
         endwhile;
+        wp_reset_postdata();
     } else {
         default_products();
+        wp_reset_postdata();
     }
+
+    wp_reset_postdata();
 }
 
 
@@ -495,28 +502,28 @@ function default_products()
                     <div class="product_variations">
                         <div class="sizes">
                             <?php
-                            if ($product->is_type('variable')) {
-                                $variations = $product->get_available_variations();
-                                $sizes = array();
-                                foreach ($variations as $variation) {
-                                    $size = $variation['attributes']['attribute_pa_size'];
-                                    if (!in_array($size, $sizes)) {
-                                        $sizes[] = $size;
-                                    }
-                                }
-                                if (!empty($sizes)) {
-                                    echo '<select>';
-                                    foreach ($sizes as $size) {
-                                        echo '<option>' . ucfirst($size) . '</option>';
-                                    }
-                                    echo '</select>';
-                                }
+                            if ($product->is_type('variable')) { ?>
+                                <select name="variation_id" id="variation_id">
+                                    <?php
+                                    foreach ($product->get_available_variations() as $variation) : ?>
+                                        <?php foreach ($variation['attributes'] as $attribute_name => $attribute_value) : ?>
+                                            <option value="<?php echo esc_attr($variation['variation_id']); ?>"><?php echo esc_html(ucfirst($attribute_value)); ?></option>
+                                        <?php endforeach; ?>
+                                    <?php endforeach;
+
+                                    ?>
+                                </select>
+
+                            <?php
+                            } else {
+                            ?>
+                                <p>No choice</p>
+                            <?php
                             }
                             ?>
                         </div>
-                        <div class="quick_shop">
-                            <a href="<?php echo get_permalink($product_id); ?>">View
-                                Product</a>
+                        <div class="quick_shop" data-variation-id="" data-product-id="<?php echo $product_id; ?>">
+                            <a href="javascript:void(0)">Quick Shop</a>
                         </div>
                     </div>
                 </div>
@@ -581,4 +588,5 @@ function default_products()
 
 <?php
     endwhile;
+    wp_reset_postdata();
 }

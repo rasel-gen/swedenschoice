@@ -1,6 +1,8 @@
 <?php
 
 
+
+
 function display_cart_items()
 {
     $cart_items = WC()->cart->get_cart();
@@ -45,8 +47,6 @@ function display_cart_items()
                     </div>
                 </div>
             </a>
-
-
 <?php
         }
     } else {

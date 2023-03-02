@@ -84,3 +84,19 @@ function my_add_to_wishlist_button()
 {
     echo do_shortcode('[yith_wcwl_add_to_wishlist]');
 }
+
+
+
+
+//cart items
+
+function cart_items()
+{
+    display_cart_items();
+}
+
+// Register the AJAX handler function with WordPress.
+add_action('wp_ajax_cart_items', 'cart_items');
+add_action('wp_ajax_nopriv_cart_items', 'cart_items')
+
+?>
