@@ -392,9 +392,9 @@
 
 
         $('body').on('click', '.single_add_to_cart_button', function() {
-            var variation_id = $('#variation_id').val();
+            var variation_id = $('#size-select').val();
             var productId = $(this).val();
-            console.log(productId);
+            console.log(variation_id);
             // alert("Hi");
 
             $.ajax({
@@ -421,14 +421,13 @@
             });
         });
 
-        $('body').on('change', '#variation_id', function() {
+        $('body').on('change', '#size-select', function() {
             var variation_id = $(this).val();
             $('.quick_shop').attr('data-variation-id', variation_id);
         });
         $('body').on('click', '.quick_shop', function() {
-            var variation_id = $(this).attr('data-variation-id');
             var productId = $(this).attr('data-product-id');
-
+            var variation_id = $("#size-select_" + productId).val();
 
             $.ajax({
                 type: 'POST',
@@ -476,6 +475,81 @@
 
     });
 </script>
+
+<script>
+    jQuery(document).ready(function($) {
+        var product_id = <?php echo get_the_ID(); ?>;
+        var size_select = $('#size-select');
+
+        size_select.html('<option value="">Select a color</option>');
+
+        $('.colors').click(function() {
+            var color_value = $(this).data('color');
+            $(this).toggleClass('colors_border');
+            if (color_value.length) {
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                    data: {
+                        action: 'get_variation_sizes',
+                        product_id: product_id,
+                        color_value: color_value,
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        size_select.html(response);
+                    },
+                });
+
+                size_select.trigger('change');
+
+            } else {
+                size_select.html('<option value="">Select a size</option>');
+            }
+        });
+
+
+
+        $('#size-select').on('change', function() {
+            // Get the selected size value
+            var item_price = $('#size-select option:selected').data('price');
+            $(".price").html("Price is : " + item_price);
+        });
+
+
+
+        $('.product_colors_all').click(function() {
+            var product_id = $(this).data('product-id');
+            var size_select = $('#size-select_' + product_id);
+            var color_value = $(this).data('color');
+            $(this).toggleClass('colors_border');
+
+            console.log(product_id);
+            if (color_value.length) {
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                    data: {
+                        action: 'get_variation_sizes',
+                        product_id: product_id,
+                        color_value: color_value,
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        size_select.html(response);
+                    },
+                });
+
+                size_select.trigger('change');
+
+            } else {
+                size_select.html('<option value="">Select a size</option>');
+            }
+        });
+
+    });
+</script>
+
 <?php wp_footer() ?>
 </body>
 

@@ -56,6 +56,8 @@
         </div>
         <div class="color_filter_dropdown">
             <form id="color-filter-form">
+                <input type="text" hidden value="<?php echo get_queried_object_id(); ?>" name="category_id">
+                <input type="text" hidden value="pa_color" name="taxonomy">
                 <?php
                 $colors = get_terms(
                     array(
@@ -158,6 +160,7 @@
                     )
                 );
                 ?>
+                <input type="text" hidden value="<?php echo get_queried_object_id(); ?>" name="category_id">
                 <input type="text" hidden value="pa_material" name="taxonomy">
                 <?php
                 if ($materials) {

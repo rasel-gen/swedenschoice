@@ -31,7 +31,7 @@ a:focus {
 }
 
 .web_header header {
-  margin: 0px auto !important;
+  margin: 12px auto !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -90,7 +90,7 @@ a:focus {
 /* website header end */
 
 .wrapper {
-  margin-top: 113px;
+  margin-top: 156px;
   margin-bottom: 73px;
 }
 
@@ -1014,7 +1014,7 @@ body .woocommerce form.register {
   gap: 10px;
   align-items: center;
   position: relative;
-  padding: 3px 5px;
+  padding: 12px 5px;
 }
 .shopping_cart:hover {
   background: #f2f2f2;
@@ -1031,6 +1031,24 @@ body .woocommerce form.register {
   font-size: 20px;
 }
 
+.promotion {
+  position: absolute;
+  background: #282828;
+  width: 100%;
+  top: 0;
+  color: #fff;
+  padding: 1px 0px;
+}
+.promotion p {
+  text-align: center;
+  font-size: 13px;
+  margin: 0;
+  padding-bottom: 3px;
+}
+.promotion a {
+  color: #fff;
+  text-decoration: underline;
+}
 .shopping_cart:hover .visited_item {
   display: inline-flex;
   background: #fff;
@@ -1045,9 +1063,19 @@ body .woocommerce form.register {
   z-index: 5;
   width: 311px;
   box-shadow: 8px -4px 41px #e3e3e3;
-  right: -72px;
+  right: -73px;
 }
 
+.colors,
+.product_colors_all {
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.colors_border {
+  border: 1px solid !important;
+}
 .product_colors {
   display: inline-flex;
   gap: 8px;
@@ -1060,8 +1088,8 @@ body .woocommerce form.register {
   background: #fff;
   height: 16px;
   rotate: 43deg;
-  top: -19px;
-  left: 151px;
+  top: -14px;
+  left: 144px;
   display: block;
 }
 
@@ -1450,8 +1478,6 @@ body .woocommerce form.register {
     margin: 20px 0px;
     width: 100%;
   }
-
-
 
   .product_page {
     width: 100%;
@@ -3194,7 +3220,6 @@ body .woocommerce form.register {
   display: none;
 }
 
-
 .link-border {
   background: transparent;
   border: 1px solid #0ec1ae;
@@ -3311,7 +3336,7 @@ body .woocommerce form.register {
   border: 0.25em solid rgb(70 207 193) !important;
   border-radius: 50%;
 }
-.swal2-icon.swal2-success [class^=swal2-success-line] {
+.swal2-icon.swal2-success [class^="swal2-success-line"] {
   display: block;
   position: absolute;
   z-index: 2;
@@ -3320,13 +3345,13 @@ body .woocommerce form.register {
   background-color: #0ec1ae;
 }
 .swal2-styled.swal2-confirm {
-    border: 0;
-    border-radius: 0.25em;
-    background: initial;
-    background-color: #0ec1ae !important;
-    color: #fff;
-    font-size: 1em;
-    width: 100%;
+  border: 0;
+  border-radius: 0.25em;
+  background: initial;
+  background-color: #0ec1ae !important;
+  color: #fff;
+  font-size: 1em;
+  width: 100%;
 }
 
 .swal2-styled.swal2-confirm:focus {

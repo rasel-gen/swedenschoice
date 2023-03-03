@@ -75,7 +75,7 @@ get_header();
                         foreach ($color_attributes_array as $color_attribute) {
 
                         ?>
-                            <div class="colors" style="width: 11px; height: 11px; background: <?php echo $color_attribute;  ?>;border-radius: 50%">
+                            <div class="colors" style="background: <?php echo $color_attribute;  ?>;" data-color="<?php echo $color_attribute; ?>">
                             </div>
                         <?php
                         }
@@ -90,31 +90,15 @@ get_header();
                         'hide_empty' => false,
                         'order_by' => 'ASC',
                         'add_to_cart' => true,
-                    )
+                    ),
                 );
                 ?>
+
+
                 <div class="size_scale">
                     <div class="customer_choice_size">
-                        <?php
-                        if ($product->is_type('variable')) { ?>
-                            <select name="variation_id" id="variation_id">
-                                <?php
-                                foreach ($product->get_available_variations() as $variation) : ?>
-                                    <?php foreach ($variation['attributes'] as $attribute_name => $attribute_value) : ?>
-                                        <option value="<?php echo esc_attr($variation['variation_id']); ?>"><?php echo esc_html(ucfirst($attribute_value)); ?></option>
-                                    <?php endforeach; ?>
-                                <?php endforeach;
-
-                                ?>
-                            </select>
-
-                        <?php
-                        } else {
-                        ?>
-                            <p>No choice</p>
-                        <?php
-                        }
-                        ?>
+                        <select name="variation_id" id="size-select">
+                        </select>
                     </div>
                     <div class="size_guide">
                         <svg width="1em" height="1em" fill="#FFFFFF" viewBox="0 0 24 24">

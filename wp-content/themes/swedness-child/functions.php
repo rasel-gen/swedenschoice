@@ -97,6 +97,38 @@ function cart_items()
 
 // Register the AJAX handler function with WordPress.
 add_action('wp_ajax_cart_items', 'cart_items');
-add_action('wp_ajax_nopriv_cart_items', 'cart_items')
+add_action('wp_ajax_nopriv_cart_items', 'cart_items');
 
-?>
+add_action('wp_ajax_get_variation_sizes', 'get_variation_sizes');
+add_action('wp_ajax_nopriv_get_variation_sizes', 'get_variation_sizes');
+function get_variation_sizes()
+{
+    $product_id = isset($_POST['product_id']) ? intval($_POST['product_id']) : 0;
+    $color_value = isset($_POST['color_value']) ? sanitize_title($_POST['color_value']) : '';
+
+    if ($product_id && $color_value) {
+        $product = wc_get_product($product_id);
+        $variations = $product->get_available_variations();
+
+        $options = '';
+        foreach ($variations as $variation) {
+            if ($variation['attributes']['attribute_pa_color'] === $color_value) {
+                $size_value = $variation['attributes']['attribute_pa_size'];
+                $variation_id = $variation['variation_id'];
+                $price = $variation['display_price'];
+                if ($size_value) {
+                    $options .= '<option data-price="' . $price . '" value="' . $variation_id . '">' . esc_html($size_value) . '</option>';
+                } else {
+                    $options .= '<option  data-price="' . $price . '" value="' . $variation_id . '">No sizes available</option>';
+                }
+            }
+        }
+
+        if (empty($options)) {
+            $options = '<option value="">No sizes available</option>';
+        }
+
+        echo $options;
+    }
+    wp_die();
+}

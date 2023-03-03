@@ -37,6 +37,31 @@ if (!defined('ABSPATH')) {
     </div>
     <!-- website header -->
     <div class="web_header">
+        <?php
+        // Query custom post type data
+        $args = array(
+            'post_type' => 'promotion',
+            'posts_per_page' => -1,
+            'orderby' => 'title',
+            'order' => 'ASC',
+        );
+        $query = new WP_Query($args);
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post();
+                // Display post content here
+
+        ?>
+                <div class="promotion">
+                    <?php echo the_content(); ?>
+                </div>
+        <?php
+            }
+        }
+        wp_reset_postdata();
+
+
+        ?>
         <div class="container">
             <header>
                 <div class="website_left">
@@ -147,7 +172,7 @@ if (!defined('ABSPATH')) {
                         </div>
                         <div class="visited_item">
                             <div class="display_last_visited_products">
-                               <div class="cart_items_data"></div>
+                                <div class="cart_items_data"></div>
                             </div>
                         </div>
                     </div>

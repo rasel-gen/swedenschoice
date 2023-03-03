@@ -179,15 +179,8 @@ get_header();
                                                     <div class="sizes">
                                                         <?php
                                                         if ($product->is_type('variable')) { ?>
-                                                            <select name="variation_id" id="variation_id">
-                                                                <?php
-                                                                foreach ($product->get_available_variations() as $variation) : ?>
-                                                                    <?php foreach ($variation['attributes'] as $attribute_name => $attribute_value) : ?>
-                                                                        <option value="<?php echo esc_attr($variation['variation_id']); ?>"><?php echo esc_html(ucfirst($attribute_value)); ?></option>
-                                                                    <?php endforeach; ?>
-                                                                <?php endforeach;
+                                                            <select name="size-select" id="size-select_<?php echo $product_id; ?>">
 
-                                                                ?>
                                                             </select>
 
                                                         <?php
@@ -204,8 +197,6 @@ get_header();
                                                 </div>
                                             </div>
                                             <div class="liked_button" product-data="<?php echo $product_id; ?>">
-                                                <!-- <a href="<?php echo esc_url(add_query_arg('add_to_wishlist', $product_id)); ?>" class="my-custom-button">
-                                                <i class="fa fa-light fa-heart"></i></a> -->
                                                 <?php
                                                 echo do_shortcode('[yith_wcwl_add_to_wishlist]');
 
@@ -244,7 +235,7 @@ get_header();
                                                     foreach ($color_attributes_array as $color_attribute) {
 
                                                     ?>
-                                                        <div class="colors" style="width: 11px; height: 11px; background: <?php echo $color_attribute;  ?>;border-radius: 50%">
+                                                        <div class="product_colors_all" data-product-id="<?php echo $product_id; ?>" style="background: <?php echo $color_attribute;  ?>;" data-color="<?php echo $color_attribute; ?>">
                                                         </div>
                                                     <?php
                                                     }
